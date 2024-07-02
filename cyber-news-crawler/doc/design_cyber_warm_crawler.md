@@ -1,4 +1,4 @@
-# Cyber Warm Crawler 设计文档
+# Cyber News Crawler 设计文档
 
 ## 功能设计
 

@@ -1,8 +1,6 @@
-# Cyber Warm
+# Cyber News
 
 This project collects news of interest to me from the internet daily, making it convenient for me to stay updated on what's happening in the world.
-
-The project name is inspired by a friend's Weibo username: "Cyber Warm-hearted Guy."（赛博暖男）
 
 ## Features
 
@@ -13,8 +11,8 @@ The project name is inspired by a friend's Weibo username: "Cyber Warm-hearted G
 
 ## Structure
 
-- cyber-warm-crawler: A crawler written in Python which collects news of interest to me.
-- cyber-warm-server: A server written in Go which provides services for surfing the news.
+- cyber-news-crawler: A crawler written in Python which collects news of interest to me.
+- cyber-news-server: A server written in Go which provides services for surfing the news.
 
 ## Requirements
 

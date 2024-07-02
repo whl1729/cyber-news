@@ -1,4 +1,4 @@
-# Cyber Warm 设计文档
+# Cyber News 设计文档
 
 ## 功能设计
 
