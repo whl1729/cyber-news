@@ -2,9 +2,9 @@
 import logging
 from logging.handlers import RotatingFileHandler
 
-from util.fs import log_dir
-from util.fs import log_path
-from util.argparser import args
+from crawler.util.fs import log_dir
+from crawler.util.fs import log_path
+from crawler.util.argparser import args
 
 def init_logger(log_level: str):
     logger = logging.getLogger("helloworld")
@@ -28,5 +28,4 @@ def init_logger(log_level: str):
     logger.info("Successfully initialized the logger")
     return logger
 
-
-logger: logging.Logger = init_logger(args.log_level)
+logger = init_logger(args.log_level)

@@ -2,8 +2,8 @@ from dotenv import load_dotenv
 import os
 import yaml
 
-from util import fs
-from util.logger import logger
+from crawler.util import fs
+from crawler.util.logger import logger
 
 class Configer:
     def __init__(self, file_path: str):

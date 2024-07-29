@@ -1,6 +1,7 @@
 bs4
 lxml
 pre-commit
+PySocks
 python-dotenv
 PyYAML
 requests
