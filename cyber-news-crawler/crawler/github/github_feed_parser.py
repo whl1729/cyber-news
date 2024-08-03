@@ -96,7 +96,7 @@ class GithubFeedParser:
         paths = feed_xpaths.get(elem_type, [])
         for path in paths:
             data = first(div.xpath(path))
-            if data:
+            if len(data) > 0:
                 return data
         return default
 
@@ -104,6 +104,6 @@ class GithubFeedParser:
         paths = feed_xpaths["do"]
         for path in paths:
             data = strip_join(div.xpath(path))
-            if data:
+            if len(data) > 0:
                 return data
         return ""
