@@ -65,6 +65,7 @@ class GithubFeedParser:
         for div in divs:
             activity = self._parse_activity(div)
             if activity is not None:
+                logger.debug(activity)
                 activities.append(activity)
         return activities
 

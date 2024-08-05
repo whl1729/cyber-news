@@ -4,7 +4,8 @@ SCRIPT_DIR="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)"
 PROJECT_DIR="${SCRIPT_DIR}/.."
 CRAWLER_DIR="${PROJECT_DIR}/crawler"
 CRAWLER_PATH=""
-NAME=""
+LOG_LEVEL="info"
+REMOVE_LOG=0
 
 function show_usage() {
   echo "Usage: $0 path [options]"
@@ -13,7 +14,7 @@ function show_usage() {
 
   echo "Options:"
   echo "  -h, --help       Show this help message"
-  echo "  -n, --name NAME  Specify a name"
+  echo "  -l, --log-level LEVEL  Specify log level. Value: debug, info, warn or error"
 }
 
 function parse_args() {
@@ -31,9 +32,12 @@ function parse_args() {
         show_usage
         exit
         ;;
-      -n|--name)
-        NAME="$2"
+      -l|--log-level)
+        LOG_LEVEL="$2"
         shift
+        ;;
+      -r|--remove-log)
+        REMOVE_LOG=1
         ;;
       *)
         echo "Unknown parameter passed: $1"
@@ -48,12 +52,17 @@ function parse_args() {
 function main() {
   parse_args "$@"
 
+  if ((${REMOVE_LOG} == 1)); then
+    rm ${LOG_PATH}
+    echo "Successfully removed log"
+  fi
+
   if [[ -d "${PROJECT_DIR}/.venv" ]]; then
     source "${PROJECT_DIR}/.venv/Scripts/activate"
   fi
 
   export PYTHONPATH=${PROJECT_DIR}:${CRAWLER_DIR}:${PYTHONPATH}
-  python "${PROJECT_DIR}/${CRAWLER_PATH}"
+  python "${PROJECT_DIR}/${CRAWLER_PATH}" -l "${LOG_LEVEL}"
 }
 
 main "$@"

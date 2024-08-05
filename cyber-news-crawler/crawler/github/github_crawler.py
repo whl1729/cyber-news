@@ -2,7 +2,6 @@ import requests
 from crawler import github
 from crawler.github.github_feed_parser import GithubFeedParser
 from crawler.util import fs
-from crawler.util import proxy
 from crawler.util.configer import config
 from crawler.util.logger import logger
 from lxml import etree
@@ -10,7 +9,7 @@ from lxml import etree
 
 class GithubCrawler(object):
     def __init__(self):
-        proxy.init()
+        # proxy.init()
 
         self._email = config["github_username"]
         self._password = config["github_password"]
@@ -27,12 +26,13 @@ class GithubCrawler(object):
             "password": self._password,
         }
         response = self._session.post(
-            github.session_url, data=post_data, headers=github.headers
+            github.session_url, data=post_data, headers=github.headers, timeout=10
         )
         if response.status_code != 200:
             logger.error(f"failed to login in: {response}")
             return False
 
+        self._save(response.text, "login.html")
         logger.info("Successfully logined in")
         return True
 
