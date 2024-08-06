@@ -9,8 +9,6 @@ from lxml import etree
 
 class GithubCrawler(object):
     def __init__(self):
-        # proxy.init()
-
         self._email = config["github_username"]
         self._password = config["github_password"]
         self._session = requests.Session()
@@ -51,6 +49,23 @@ class GithubCrawler(object):
         token = selector.xpath('//*[@id="login"]/div[4]/form/input[1]/@value')
         return token
 
+    def verify_device(self):
+        post_data = {
+            "authenticity_token": self._token,
+            "otp": "984580",
+        }
+        response = self._session.post(
+            github.verify_url, data=post_data, headers=github.headers
+        )
+        if response.status_code != 200:
+            logger.error(f"failed to verify device: {response}")
+            self._save(response.text, "verify.html")
+            return False
+
+        self._save(response.text, "verify.html")
+        logger.info("Successfully verified")
+        return True
+
     def _save(self, html: str, dest_path: str):
         with open(fs.log_dir / dest_path, "w", encoding="utf-8") as f:
             f.write(html)
@@ -58,5 +73,6 @@ class GithubCrawler(object):
 
 if __name__ == "__main__":
     github_crawler = GithubCrawler()
+    github_crawler.verify_device()
     github_crawler.login()
     github_crawler.get_feed()

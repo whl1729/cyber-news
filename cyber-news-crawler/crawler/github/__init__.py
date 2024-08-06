@@ -5,9 +5,10 @@ login_url = "https://github.com/login"
 # 后来在 https://github.com/orgs/community/discussions/64982 看到可以使用 `/dashboard-feed`
 feed_url = "https://github.com/dashboard-feed"
 session_url = "https://github.com/session"
+verify_url = "https://github.com/sessions/verified-device"
 
 headers = {
     "Referer": "https://github.com/",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0",
     "Host": "github.com",
 }

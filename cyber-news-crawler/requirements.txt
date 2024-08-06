@@ -5,3 +5,5 @@ PySocks
 python-dotenv
 PyYAML
 requests
+selenium
+webdriver-manager
