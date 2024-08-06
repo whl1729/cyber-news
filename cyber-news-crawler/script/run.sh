@@ -57,8 +57,8 @@ function main() {
     echo "Successfully removed log"
   fi
 
-  if [[ -d "${PROJECT_DIR}/.venv" ]]; then
-    source "${PROJECT_DIR}/.venv/Scripts/activate"
+  if [[ -d "${PROJECT_DIR}/.venv/bin" ]]; then
+    source "${PROJECT_DIR}/.venv/bin/activate"
   fi
 
   export PYTHONPATH=${PROJECT_DIR}:${CRAWLER_DIR}:${PYTHONPATH}

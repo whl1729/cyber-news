@@ -17,3 +17,8 @@ log_dir: Path = project_dir / "log"
 log_path: str = str(log_dir / "crawler_log.txt")
 
 log_dir.mkdir(exist_ok=True)
+
+
+def save_log(content: str, dest_path: str):
+    with open(log_dir / dest_path, "w", encoding="utf-8") as f:
+        f.write(content)
