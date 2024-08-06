@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from crawler.github import url_prefix
+from crawler import github
 from crawler.util.logger import logger
 from crawler.util.mylist import first
 from crawler.util.mylist import strip_join
@@ -80,7 +80,7 @@ class GithubFeedParser:
         what = self._parse_element(title, "what").strip()
         when = self._parse_element(title, "when")
         abstract = self._parse_element(div, "abstract").strip()
-        link = url_prefix + self._parse_element(div, "link")
+        link = github.host + self._parse_element(div, "link")
 
         activity = Activity(
             who=who,
