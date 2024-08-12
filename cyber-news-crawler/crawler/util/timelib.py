@@ -13,4 +13,4 @@ def now2():
 
 
 def today():
-    return datetime.now().strftime("%Y%m%d")
+    return datetime.now().strftime("%Y-%m-%d")

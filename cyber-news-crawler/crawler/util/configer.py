@@ -20,6 +20,9 @@ class Configer:
         self._config["exmail_server"] = os.getenv("EXMAIL_SERVER")
         self._config["exmail_user"] = os.getenv("EXMAIL_USER")
         self._config["exmail_password"] = os.getenv("EXMAIL_PASSWORD")
+        self._config["mongodb_host"] = os.getenv("MONGODB_HOST", "127.0.0.1")
+        self._config["mongodb_port"] = os.getenv("MONGODB_PORT", 27017)
+        self._config["mongodb_database"] = os.getenv("MONGODB_database", "newsDB")
 
     def _load_config(self):
         config_path = fs.config_dir / self._file_path

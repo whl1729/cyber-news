@@ -1,6 +1,7 @@
 bs4
 lxml
 pre-commit
+pymongo
 PySocks
 python-dotenv
 PyYAML

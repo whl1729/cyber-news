@@ -2,12 +2,14 @@ from bs4 import BeautifulSoup
 from crawler import github
 from crawler.util import fs
 from crawler.util import myrequests
+from crawler.util import timelib
 from crawler.util.logger import logger
+from crawler.util.mongodb import mongo
 
 
 class GithubTrendingCrawler:
     def crawl(self):
-        response = myrequests.get(github.trending_url)
+        response = myrequests.get(github.trending_url, timeout=10)
         if response is None:
             logger.error("Failed to retrieve the github trending page")
             return None
@@ -17,20 +19,16 @@ class GithubTrendingCrawler:
 
         articles = soup.find_all("article", {"class": "Box-row"})
         repos = [GithubRepository(article).parse() for article in articles]
+        logger.info(f"Successfully crawled {len(repos)} github trending repos")
 
-        # 打印仓库信息
         for repo in repos:
             if repo is None:
                 continue
 
-            logger.info(f"Name: {repo['name']}")
-            logger.info(f"Link: {repo['link']}")
-            logger.info(f"Description: {repo['description']}")
-            logger.info(f"Language: {repo['language']}")
-            logger.info(f"Stars: {repo['stars']}")
-            logger.info(f"Forks: {repo['forks']}")
-            logger.info(f"Stars Today: {repo['stars_today']}")
-            logger.info("=" * 100)
+            exists = mongo.find("github_trending", {"name": repo["name"]})
+            if not exists:
+                mongo.insert_one("github_trending", repo)
+                logger.info(f"Successfully inserted a github trending repo: {repo}")
 
         return repos
 
@@ -51,6 +49,7 @@ class GithubRepository:
         stars = self._parse_stars()
         forks = self._parse_forks()
         stars_today = self._parse_stars_today()
+        now = timelib.now2()
 
         return {
             "name": name,
@@ -60,6 +59,7 @@ class GithubRepository:
             "stars": stars,
             "forks": forks,
             "stars_today": stars_today,
+            "time": now,
         }
 
     def _parse_name(self):

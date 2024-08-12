@@ -3,8 +3,8 @@ import argparse
 
 def parse_args():
     argparser = argparse.ArgumentParser(
-        "demo",
-        description="a demo project",
+        "cyber-news-crawler",
+        description="crawl news on the Internet",
     )
     argparser.add_argument(
         "-l",
@@ -20,4 +20,4 @@ def parse_args():
 args = parse_args()
 
 if __name__ == "__main__":
-    print(f'log_level: {args.log_level}, args: {args}')
+    print(f"log_level: {args.log_level}, args: {args}")

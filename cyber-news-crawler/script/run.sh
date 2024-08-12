@@ -1,5 +1,6 @@
 #!/bin/bash
 
+WORKING_DIR="$(pwd -P)"
 SCRIPT_DIR="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)"
 PROJECT_DIR="${SCRIPT_DIR}/.."
 CRAWLER_DIR="${PROJECT_DIR}/crawler"
@@ -10,7 +11,7 @@ REMOVE_LOG=0
 function show_usage() {
   echo "Usage: $0 path [options]"
   echo "Arguments:"
-  echo "  path             Specify a script path to run, such as \"crawler/github/github_login.py\""
+  echo "  path             Specify a relative script path to run, such as \"crawler/github/github_login.py\""
 
   echo "Options:"
   echo "  -h, --help       Show this help message"
@@ -62,7 +63,7 @@ function main() {
   fi
 
   export PYTHONPATH=${PROJECT_DIR}:${CRAWLER_DIR}:${PYTHONPATH}
-  python "${PROJECT_DIR}/${CRAWLER_PATH}" -l "${LOG_LEVEL}"
+  python "${WORKING_DIR}/${CRAWLER_PATH}" -l "${LOG_LEVEL}"
 }
 
 main "$@"

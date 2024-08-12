@@ -4,26 +4,26 @@ repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v3.2.0
   hooks:
-  - id: trailing-whitespace
-  - id: end-of-file-fixer
-  - id: check-added-large-files
-  - id: check-yaml
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
+    - id: check-added-large-files
+    - id: check-yaml
 - repo: https://github.com/asottile/reorder_python_imports
   rev: v3.1.0
   hooks:
-  - id: reorder-python-imports
+    - id: reorder-python-imports
 - repo: https://github.com/PyCQA/autoflake
   rev: v2.1.1
   hooks:
-  - id: autoflake
+    - id: autoflake
 - repo: https://github.com/psf/black
   rev: 22.3.0
   hooks:
-  - id: black
+    - id: black
 - repo: https://github.com/PyCQA/flake8
   rev: 4.0.1
   hooks:
-  - id: flake8
+    - id: flake8
 - repo: https://github.com/commitizen-tools/commitizen
   rev: v2.27.0
   hooks:
