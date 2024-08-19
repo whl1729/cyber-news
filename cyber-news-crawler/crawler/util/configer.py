@@ -22,7 +22,11 @@ class Configer:
         self._config["exmail_password"] = os.getenv("EXMAIL_PASSWORD")
         self._config["mongodb_host"] = os.getenv("MONGODB_HOST", "127.0.0.1")
         self._config["mongodb_port"] = os.getenv("MONGODB_PORT", 27017)
-        self._config["mongodb_database"] = os.getenv("MONGODB_database", "newsDB")
+        self._config["mongodb_database"] = os.getenv("MONGODB_DATABASE", "newsDB")
+
+        proxy_url = os.getenv("PROXY_URL")
+        proxies = {"http": proxy_url, "https": proxy_url}
+        self._config["proxies"] = proxies
 
     def _load_config(self):
         config_path = fs.config_dir / self._file_path

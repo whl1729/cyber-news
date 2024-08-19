@@ -3,13 +3,16 @@ from crawler import github
 from crawler.util import fs
 from crawler.util import myrequests
 from crawler.util import timelib
+from crawler.util.configer import config
 from crawler.util.logger import logger
 from crawler.util.mongodb import mongo
 
 
 class GithubTrendingCrawler:
     def crawl(self):
-        response = myrequests.get(github.trending_url, timeout=10)
+        response = myrequests.get(
+            github.trending_url, proxies=config["proxies"], timeout=10
+        )
         if response is None:
             logger.error("Failed to retrieve the github trending page")
             return None
