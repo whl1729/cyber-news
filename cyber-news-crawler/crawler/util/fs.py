@@ -1,6 +1,7 @@
 """
 This module manages the file path for the project.
 """
+import json
 import sys
 from pathlib import Path
 
@@ -22,3 +23,11 @@ log_dir.mkdir(exist_ok=True)
 def save_log(content: str, dest_path: str):
     with open(log_dir / dest_path, "w", encoding="utf-8") as f:
         f.write(content)
+
+
+def save_json(content: object, dest_path: str):
+    if isinstance(content, str):
+        content = json.loads(content)
+
+    with open(log_dir / dest_path, "w", encoding="utf-8") as f:
+        json.dump(content, f, indent=4, ensure_ascii=False)

@@ -17,6 +17,7 @@ class Configer:
     def _merge_env(self):
         self._config["github_username"] = os.getenv("GITHUB_USERNAME")
         self._config["github_password"] = os.getenv("GITHUB_PASSWORD")
+        self._config["github_token"] = os.getenv("GITHUB_TOKEN")
         self._config["exmail_server"] = os.getenv("EXMAIL_SERVER")
         self._config["exmail_user"] = os.getenv("EXMAIL_USER")
         self._config["exmail_password"] = os.getenv("EXMAIL_PASSWORD")
