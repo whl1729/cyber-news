@@ -1,24 +1,13 @@
 from bs4 import BeautifulSoup
 from crawler import github
-from crawler.util import fs
-from crawler.util import myrequests
 from crawler.util import timelib
-from crawler.util.configer import config
 from crawler.util.logger import logger
 from crawler.util.mongodb import mongo
 
 
-class GithubTrendingCrawler:
-    def crawl(self):
-        response = myrequests.get(
-            github.trending_url, proxies=config["proxies"], timeout=10
-        )
-        if response is None:
-            logger.error("Failed to retrieve the github trending page")
-            return None
-
-        fs.save_log(response.text, "github_trending.html")
-        soup = BeautifulSoup(response.text, "html.parser")
+class GithubTrendingParser:
+    def parse(self, resp_text: str):
+        soup = BeautifulSoup(resp_text, "html.parser")
 
         articles = soup.find_all("article", {"class": "Box-row"})
         repos = [GithubRepository(article).parse() for article in articles]
@@ -119,8 +108,3 @@ class GithubRepository:
         except Exception:
             logger.error(f"Failed to transform stars_today to int: '{stars_today}'")
             return -1
-
-
-if __name__ == "__main__":
-    trending_crawler = GithubTrendingCrawler()
-    trending_crawler.crawl()
