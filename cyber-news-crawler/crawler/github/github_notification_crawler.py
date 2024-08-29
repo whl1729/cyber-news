@@ -2,6 +2,7 @@ import json
 from typing import List
 
 from crawler import github
+from crawler.util import web_crawler
 from crawler.util.logger import logger
 
 
@@ -9,7 +10,7 @@ class GithubNotificationParser:
     def parse(self, resp_text: str) -> List[dict]:
         news_list = []
         notifications = json.loads(resp_text)
-        for i, notification in enumerate(notifications):
+        for notification in notifications:
             news = {
                 "id": notification["id"],
                 "repo": notification["repository"]["full_name"],
@@ -20,8 +21,8 @@ class GithubNotificationParser:
             }
 
             news_list.append(news)
-            logger.info(f"{i+1}. notification: {news}")
 
+        logger.info(f"{len(notifications)} github notifications parsed")
         return news_list
 
     @staticmethod
@@ -35,3 +36,17 @@ class GithubNotificationParser:
             return url + "/discussions"
 
         return url
+
+
+def crawl():
+    parser = GithubNotificationParser()
+    web_crawler.crawl(
+        parser,
+        github.notification_url,
+        "github_notifications",
+        headers=github.headers,
+    )
+
+
+if __name__ == "__main__":
+    crawl()
