@@ -18,7 +18,7 @@ class GithubTrendingCrawler:
             logger.error("Failed to retrieve the github trending page")
             return None
 
-        fs.save_log(response.text, "github_trending.html")
+        fs.save_response_text(response.text, "github_trending.html")
         return self._parser.parse(response.text)
 
 

@@ -20,7 +20,7 @@ class GithubTrendingParser:
             exists = mongo.find("github_trending", {"name": repo["name"]})
             if not exists:
                 mongo.insert_one("github_trending", repo)
-                logger.info(f"Successfully inserted a github trending repo: {repo}")
+                logger.info(f"Successfully inserted a github trending news: {repo}")
 
         return repos
 
