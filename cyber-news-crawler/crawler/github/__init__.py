@@ -1,0 +1,17 @@
+from crawler.util.configer import config
+
+host = "https://github.com"
+login_url = "https://github.com/login"
+# 在开发者工具中看到 Github 主页的 Home 部分请求了 `/conduit/for_you_feed`，但我使用时会报 404 的错误
+# feed_url = 'https://github.com/conduit/for_you_feed'
+# 后来在 https://github.com/orgs/community/discussions/64982 看到可以使用 `/dashboard-feed`
+feed_url = "https://github.com/dashboard-feed"
+session_url = "https://github.com/session"
+verify_url = "https://github.com/sessions/verified-device"
+trending_url = "https://github.com/trending"
+notification_url = "https://api.github.com/notifications"
+
+headers = {
+    "Authorization": f'token {config["github_token"]}',
+    "Accept": "application/vnd.github.v3+json",
+}
