@@ -21,7 +21,7 @@ log_dir.mkdir(exist_ok=True)
 
 
 def save_response_text(content: str, filename: str):
-    if "<!DOCTYPE html>" in content:
+    if "<html" in content:
         save_text(content, filename + ".html")
         return
 

@@ -24,7 +24,12 @@ def crawl(
         return False
 
     fs.save_response_text(response.text, name)
-    news_list = parser.parse(response.text)
+    try:
+        news_list = parser.parse(response.text)
+    except Exception as e:
+        logger.error(f"{parser} failed to parse {name}: {e}")
+        return False
+
     count = mongo.insert_many_new(name, "id", news_list)
     logger.info(f"{count} {name.replace('_', ' ')} inserted")
     return True
