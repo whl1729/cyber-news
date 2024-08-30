@@ -32,6 +32,7 @@ class HackerNewsParser(WebParser):
                 "score": self._get_score(subtext),
                 "comment_count": self._get_comment_count(subtext),
                 "created_at": self._get_time(subtext),
+                "updated_at": timelib.now2(),
             }
             news_list.append(news)
 
