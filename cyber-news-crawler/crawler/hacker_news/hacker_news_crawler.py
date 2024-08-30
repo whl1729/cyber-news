@@ -67,9 +67,9 @@ class HackerNewsParser(WebParser):
     @staticmethod
     def _get_comment_count(subtext: Tag) -> int:
         for anchor in reversed(subtext.span.find_all(name="a")):
-            comment = anchor.string
-            if comment.endswith("comment"):
-                return mystr.extract_leading_numbers(comment)
+            comment_str = anchor.string
+            if "comments" in comment_str:
+                return mystr.extract_leading_numbers(comment_str)
         return 0
 
 
