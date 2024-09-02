@@ -27,15 +27,14 @@ class RuanyifengWeeklyParser(WebParser):
             "id": self._title,
             "url": self._url,
             "created_at": self._parse_date(soup),
-            "hot_news": self._parse_hot_news(soup),
-            "technology": self._parse_section(soup, "科技动态"),
-            "articles": self._parse_section(soup, "文章"),
-            "tools": self._parse_section(soup, "工具"),
-            "ai": self._parse_section(soup, "AI 相关"),
-            "resources": self._parse_section(soup, "资源"),
-            "photos": self._parse_section(soup, "图片"),
-            "summary": self._parse_section(soup, "文摘"),
+            "sections": {
+                "热点": self._parse_hot_news(soup),
+            },
         }
+
+        sections = ["科技动态", "文章", "工具", "AI 相关", "资源", "图片", "文摘"]
+        for section in sections:
+            blog["sections"][section] = self._parse_section(soup, section)
         return [blog]
 
     @staticmethod
@@ -77,7 +76,7 @@ class RuanyifengWeeklyParser(WebParser):
         sibling = section.next_sibling
         while sibling.name != "h2":
             if re.search(pattern, sibling.text):
-                news_list.append(sibling.text)
+                news_list.append(sibling.text.replace("、", ". ", 1))
             sibling = sibling.next_sibling
 
         return news_list
