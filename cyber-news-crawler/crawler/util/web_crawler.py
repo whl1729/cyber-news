@@ -12,20 +12,12 @@ def crawl(
     headers: dict = None,
     proxies: dict = None,
 ) -> bool:
-    response = myrequests.get(url, headers=headers, proxies=proxies, timeout=10)
-    if response is None:
-        logger.error(f"No response from {url}")
+    resp_text = get(url, name=name, headers=headers, proxies=proxies)
+    if resp_text == "":
         return False
 
-    if response.status_code != 200:
-        logger.error(
-            f"Failed to get webpage. Status Code: {response.status_code}, URL: {url}"
-        )
-        return False
-
-    fs.save_response_text(response.text, name)
     try:
-        news_list = parser.parse(response.text)
+        news_list = parser.parse(resp_text)
     except Exception as e:
         logger.error(f"{parser} failed to parse {name}: {e}")
         return False
@@ -33,3 +25,25 @@ def crawl(
     count = mongo.insert_many_new(name, "id", news_list)
     logger.info(f"{count} {name.replace('_', ' ')} inserted")
     return True
+
+
+def get(
+    url: str,
+    name: str,
+    headers: dict = None,
+    proxies: dict = None,
+) -> str:
+    response = myrequests.get(url, headers=headers, proxies=proxies, timeout=10)
+    response.encoding = "utf-8"
+    if response is None:
+        logger.error(f"No response from {url}")
+        return ""
+
+    if response.status_code != 200:
+        logger.error(
+            f"Failed to get webpage. Status Code: {response.status_code}, URL: {url}"
+        )
+        return ""
+
+    fs.save_response_text(response.text, name)
+    return response.text

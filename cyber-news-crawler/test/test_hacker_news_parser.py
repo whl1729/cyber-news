@@ -1,7 +1,3 @@
-import sys
-
-# 为避免 argparser 报错，重新调整命令行输入参数
-sys.argv = sys.argv[:1]
 from crawler.hacker_news.hacker_news_crawler import HackerNewsParser
 from crawler.util import fs
 
