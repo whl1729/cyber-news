@@ -53,12 +53,14 @@ class RuanyifengWeeklyParser(WebParser):
     @staticmethod
     def _parse_hot_news(soup: BeautifulSoup) -> List[str]:
         news_list = []
+        id = 1
         for h2 in soup.find_all(name="h2"):
             if "封面图" in h2.string:
                 continue
             if "科技动态" in h2.string:
                 return news_list
-            news_list.append(h2.string)
+            news_list.append(f"{id}. {h2.string}")
+            id += 1
 
         return news_list
 
