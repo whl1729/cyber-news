@@ -3,6 +3,7 @@ lxml
 pre-commit
 pymongo
 PySocks
+pytest
 python-dotenv
 PyYAML
 requests
