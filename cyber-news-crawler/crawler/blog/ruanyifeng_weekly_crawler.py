@@ -5,6 +5,7 @@ from typing import Tuple
 
 from bs4 import BeautifulSoup
 from bs4 import Tag
+from crawler.util import timelib
 from crawler.util import web_crawler
 from crawler.util.logger import logger
 from crawler.util.web_parser import WebParser
@@ -27,6 +28,7 @@ class RuanyifengWeeklyParser(WebParser):
             "id": self._title,
             "url": self._url,
             "created_at": self._parse_date(soup),
+            "crawled_at": timelib.now2(),
             "sections": {
                 "热点": self._parse_hot_news(soup),
             },
