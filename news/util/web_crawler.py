@@ -34,7 +34,6 @@ def get(
     proxies: dict = None,
 ) -> str:
     response = myrequests.get(url, headers=headers, proxies=proxies, timeout=10)
-    response.encoding = "utf-8"
     if response is None:
         logger.error(f"No response from {url}")
         return ""
@@ -45,5 +44,6 @@ def get(
         )
         return ""
 
+    response.encoding = "utf-8"
     fs.save_response_text(response.text, name)
     return response.text
