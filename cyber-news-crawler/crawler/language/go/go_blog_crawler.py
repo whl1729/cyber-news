@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from crawler.util import timelib
 from crawler.util import web_crawler
 from crawler.util.configer import config
+from crawler.util.logger import logger
 from crawler.util.web_parser import WebParser
 
 GO_BLOG_HOST = "https://go.dev"
@@ -28,6 +29,7 @@ class GoBlogParser(WebParser):
                 "crawled_at": timelib.now2(),
             }
             blog_list.append(blog)
+        logger.info(f"{len(blog_list)} go blogs parsed")
         return blog_list
 
 
