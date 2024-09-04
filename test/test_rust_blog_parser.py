@@ -2,7 +2,7 @@ from news.crawler.language.rust.rust_blog_crawler import RustBlogParser
 from news.util import fs
 
 
-def test_go_blog_parser():
+def test_rust_blog_parser():
     html_path = fs.log_dir / "rust_blog_0.html"
     with open(html_path, encoding="utf-8") as f:
         content = f.read()
@@ -17,4 +17,4 @@ def test_go_blog_parser():
 
 
 if __name__ == "__main__":
-    test_go_blog_parser()
+    test_rust_blog_parser()

@@ -75,7 +75,7 @@ def format_date_2(date_str: str):
 
 def format_time(time_str: str) -> str:
     """
-    :param date_str: 时间字符串，示例："Sep 2, 2024 02:13 PM"
+    :param time_str: 时间字符串，示例："Sep 2, 2024 02:13 PM"
     """
     try:
         # 定义输入日期格式
@@ -89,6 +89,20 @@ def format_time(time_str: str) -> str:
 
         # 将 datetime 对象格式化为所需格式的字符串
         return date_obj.strftime(output_format)
+    except Exception as _:
+        return time_str
+
+
+def format_time_2(time_str: str) -> str:
+    """
+    :param time_str: 时间字符串，示例："Tue, 11 Jul 2023 20:08:00 +0000"
+    """
+    try:
+        # 解析日期时间字符串为 datetime 对象
+        date_obj = datetime.strptime(time_str, "%a, %d %b %Y %H:%M:%S %z")
+
+        # 将 datetime 对象格式化为所需的字符串格式
+        return date_obj.strftime("%Y-%m-%d %H:%M:%S")
     except Exception as _:
         return time_str
 

@@ -29,8 +29,12 @@ post_dir.mkdir(exist_ok=True)
 
 
 def save_response_text(content: str, filename: str):
-    if "<html" in content:
+    if "<html" in content[:100]:
         save_text(content, filename + ".html")
+        return
+
+    if "xml" in content[:100]:
+        save_text(content, filename + ".xml")
         return
 
     try:
