@@ -5,6 +5,7 @@ pymongo
 PySocks
 pytest
 python-dotenv
+pytz
 PyYAML
 requests
 selenium

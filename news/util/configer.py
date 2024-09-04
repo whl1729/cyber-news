@@ -41,4 +41,4 @@ class Configer:
         return self._config
 
 
-config = Configer("crawler_config.yaml").get_config()
+config = Configer("cyber_news_config.yaml").get_config()

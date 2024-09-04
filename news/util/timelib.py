@@ -2,6 +2,9 @@
 This module gets time information.
 """
 from datetime import datetime
+from datetime import timedelta
+
+import pytz
 
 
 def now() -> str:
@@ -16,8 +19,32 @@ def now3() -> str:
     return datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
 
+def now4():
+    tz = pytz.timezone("Asia/Shanghai")
+    return datetime.now(tz).isoformat()
+
+
 def today() -> str:
     return datetime.now().strftime("%Y-%m-%d")
+
+
+def today2():
+    return datetime.now().strftime("%Y年%m月%d日")
+
+
+def yesterday():
+    yesterday = datetime.now() - timedelta(1)
+    return yesterday.strftime("%Y-%m-%d")
+
+
+def yesterday2():
+    yesterday = datetime.now() - timedelta(1)
+    return yesterday.strftime("%Y年%m月%d日")
+
+
+def n_days_ago(n: int):
+    days_ago = datetime.now() - timedelta(n)
+    return days_ago.strftime("%Y-%m-%d")
 
 
 def format_date(date_str: str) -> str:
@@ -29,6 +56,21 @@ def format_date(date_str: str) -> str:
         return date_obj.strftime("%Y-%m-%d")
     except Exception as _:
         return date_str
+
+
+def format_date_2(date_str: str):
+    """
+    :param date_str: 时间字符串，示例："May 2 2024"
+    """
+    try:
+        date_obj = datetime.strptime(date_str, "%b %d %Y")
+        return date_obj.strftime("%Y-%m-%d")
+    except Exception as _:
+        try:
+            date_obj = datetime.strptime(date_str, "%B %d %Y")
+            return date_obj.strftime("%Y-%m-%d")
+        except Exception as _:
+            return date_str
 
 
 def format_time(time_str: str) -> str:
@@ -51,16 +93,20 @@ def format_time(time_str: str) -> str:
         return time_str
 
 
-def format_date_2(date_str: str):
+def format_iso_time(iso_time_str: str):
+    dt = datetime.strptime(iso_time_str, "%Y-%m-%dT%H:%M:%SZ")
+    dt = dt.replace(tzinfo=pytz.UTC)
+    tz = pytz.timezone("Asia/Shanghai")
+    dt = dt.astimezone(tz)
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def format_iso8601_time(iso8601_str: str):
     """
-    :param date_str: 时间字符串，示例："May 2 2024"
+    :param iso8601_str: ISO 8601 日期字符串，例如："2024-08-30T08:08:59+08:00"
     """
-    try:
-        date_obj = datetime.strptime(date_str, "%b %d %Y")
-        return date_obj.strftime("%Y-%m-%d")
-    except Exception as _:
-        try:
-            date_obj = datetime.strptime(date_str, "%B %d %Y")
-            return date_obj.strftime("%Y-%m-%d")
-        except Exception as _:
-            return date_str
+    # 解析带有时区信息的 ISO 8601 日期字符串
+    dt_with_timezone = datetime.fromisoformat(iso8601_str)
+    # 将日期时间转换为不带时区信息的字符串
+    dt_without_timezone = dt_with_timezone.strftime("%Y-%m-%d %H:%M:%S")
+    return dt_without_timezone

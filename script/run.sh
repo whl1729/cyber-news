@@ -61,7 +61,7 @@ function main() {
   if [[ "${INPUT_PATH}" != "" ]]; then
     python "${WORKING_DIR}/${INPUT_PATH}" -l "${LOG_LEVEL}"
   else
-    python "${PROJECT_DIR}/news/crawler/news_crawler.py" -l "${LOG_LEVEL}"
+    python "${PROJECT_DIR}/news/news_generator.py" -l "${LOG_LEVEL}"
   fi
 }
 

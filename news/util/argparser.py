@@ -3,8 +3,8 @@ import argparse
 
 def parse_args():
     argparser = argparse.ArgumentParser(
-        "cyber-news-crawler",
-        description="crawl news on the Internet",
+        "cyber-news",
+        description="update daily technology news",
     )
     argparser.add_argument(
         "-l",

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pymongo import MongoClient
 
 from news.util.configer import config
@@ -32,13 +34,18 @@ class MongoDB:
 
         return count
 
-    def delete_one(self, coll_name: str, filter: dict):
+    def delete_one(self, coll_name: str, filter: Optional[dict] = None):
         coll = self._db[coll_name]
         return coll.delete_one(filter)
 
-    def find(self, coll_name: str, filter: dict) -> list:
+    def find(
+        self, coll_name: str, filter: Optional[dict] = None, sorter: list = None
+    ) -> list:
         coll = self._db[coll_name]
-        return list(coll.find(filter))
+        results = coll.find(filter)
+        if sorter is not None:
+            results = results.sort(sorter)
+        return list(results)
 
 
 mongo = MongoDB(
