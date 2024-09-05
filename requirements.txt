@@ -1,0 +1,13 @@
+bs4
+feedparser
+lxml
+pre-commit
+pymongo
+PySocks
+pytest
+python-dotenv
+pytz
+PyYAML
+requests
+selenium
+webdriver-manager

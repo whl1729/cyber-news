@@ -9,11 +9,6 @@ This project collects news of interest to me from the internet daily, making it 
 - You can read the news by theme, such as ai, autopilot or programming and so on
 - You can read the news by websites, such as Hacker News, Github and so on
 
-## Structure
-
-- cyber-news-crawler: A crawler written in Python which collects news of interest to me.
-- cyber-news-server: A server written in Go which provides services for surfing the news.
-
 ## Requirements
 
 - Python 3.10+
