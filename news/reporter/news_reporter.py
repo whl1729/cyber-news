@@ -4,6 +4,7 @@ from news.reporter import github_received_event_reporter
 from news.reporter import github_trending_reporter
 from news.reporter import go_reporter
 from news.reporter import hacker_news_reporter
+from news.reporter import new_stack_reporter
 from news.reporter import python_reporter
 from news.reporter import ruanyifeng_weekly_reporter
 from news.reporter import rust_reporter
@@ -19,6 +20,7 @@ def report():
     content += rust_reporter.report()
     content += ruanyifeng_weekly_reporter.report()
     content += github_trending_reporter.report()
+    content += new_stack_reporter.report()
     content += hacker_news_reporter.report()
     content += github_received_event_reporter.report()
     content += github_notification_reporter.report()

@@ -31,7 +31,8 @@ def today() -> str:
 
 
 def today2():
-    return datetime.now().strftime("%Y年%m月%d日")
+    now = datetime.now()
+    return f"{now.year}年{now.month}月{now.day}日"
 
 
 def yesterday():
