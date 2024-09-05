@@ -1,4 +1,5 @@
 bs4
+feedparser
 lxml
 pre-commit
 pymongo
