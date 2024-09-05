@@ -2,18 +2,14 @@ from news.util import timelib
 from news.util.logger import logger
 from news.util.mongodb import mongo
 
-TITLE = "## Rust\n\n"
-
 
 def report():
     content = report_rust_blog()
-    if content == "":
-        return ""
-    return TITLE + content
+    return content
 
 
 def report_rust_blog():
-    content = "### Rust Blog\n\n"
+    content = "## Rust Blog\n\n"
     yesterday = timelib.yesterday()
     last_month = timelib.n_days_ago(31)
     blog_list = mongo.find(

@@ -2,18 +2,14 @@ from news.util import timelib
 from news.util.logger import logger
 from news.util.mongodb import mongo
 
-TITLE = "## Python\n\n"
-
 
 def report():
     content = report_python_insider()
-    if content == "":
-        return ""
-    return TITLE + content
+    return content
 
 
 def report_python_insider():
-    content = "### Python Insider\n\n"
+    content = "## Python Insider\n\n"
     yesterday = timelib.yesterday()
     last_month = timelib.n_days_ago(31)
     blog_list = mongo.find(

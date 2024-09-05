@@ -2,18 +2,14 @@ from news.util import timelib
 from news.util.logger import logger
 from news.util.mongodb import mongo
 
-TITLE = "## C++\n\n"
-
 
 def report():
     content = report_isocpp_blog()
-    if content == "":
-        return ""
-    return TITLE + content
+    return content
 
 
 def report_isocpp_blog():
-    content = "### ISOCPP Blog\n\n"
+    content = "## C++ Blog\n\n"
     yesterday = timelib.yesterday()
     blog_list = mongo.find(
         "isocpp_blog",

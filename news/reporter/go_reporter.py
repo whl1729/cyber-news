@@ -2,19 +2,15 @@ from news.util import timelib
 from news.util.logger import logger
 from news.util.mongodb import mongo
 
-TITLE = "## Go\n\n"
-
 
 def report():
     content = report_go_blog()
     content += report_go_news()
-    if content == "":
-        return ""
-    return TITLE + content
+    return content
 
 
 def report_go_blog():
-    content = "### Go Blog\n\n"
+    content = "## Go Blog\n\n"
     yesterday = timelib.yesterday()
     last_month = timelib.n_days_ago(31)
     blog_list = mongo.find(
@@ -40,7 +36,7 @@ def get_go_blog(id: int, blog: dict):
 
 
 def report_go_news():
-    content = "### Go News\n\n"
+    content = "## Go News\n\n"
     yesterday = timelib.yesterday()
     last_month = timelib.n_days_ago(31)
     blog_list = mongo.find(
