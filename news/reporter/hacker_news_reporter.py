@@ -24,6 +24,6 @@ def report():
 def get_news(id: int, news: dict):
     content = f"{id+1}. [{news['title']}]({news['url']})"
     content += f" ([{news['host']}](https://{news['host']}))\n"
-    content += f"  - Time: {news['created_at'].replace('T', ' ')};"
+    content += f"  - Time: {timelib.format_iso8601_time_2(news['created_at'])};"
     content += f" Points: {news['score']}; Comments: {news['comment_count']}\n\n"
     return content
