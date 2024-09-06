@@ -9,6 +9,7 @@ from news.reporter import new_stack_reporter
 from news.reporter import python_reporter
 from news.reporter import ruanyifeng_weekly_reporter
 from news.reporter import rust_reporter
+from news.reporter import title_time_reporter
 from news.util import fs
 from news.util import timelib
 
@@ -19,11 +20,12 @@ def report():
     content += go_reporter.report()
     content += python_reporter.report()
     content += rust_reporter.report()
-    content += ruanyifeng_weekly_reporter.report()
     content += github_trending_reporter.report()
+    content += title_time_reporter.report("机器之心", "jiqizhixin")
     content += new_stack_reporter.report()
     content += infoq_reporter.report()
     content += hacker_news_reporter.report()
+    content += ruanyifeng_weekly_reporter.report()
     content += github_received_event_reporter.report()
     content += github_notification_reporter.report()
     filename = f"{timelib.today()}.md"
