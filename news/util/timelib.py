@@ -181,10 +181,20 @@ def parse_time(time_str: str) -> str:
         hours = mystr.extract_leading_numbers(time_str)
         return n_hours_ago(hours)
 
+    if "天前" in time_str:
+        days = mystr.extract_leading_numbers(time_str)
+        return n_days_ago(days)
+
     if "昨天" in time_str:
         return time_str.replace("昨天", yesterday())
 
     if "前天" in time_str:
         return time_str.replace("前天", n_days_ago(2))
+
+    try:
+        date_obj = datetime.strptime(time_str, "%Y/%m/%d")
+        return date_obj.strftime("%Y-%m-%d")
+    except ValueError as _:
+        pass
 
     return time_str

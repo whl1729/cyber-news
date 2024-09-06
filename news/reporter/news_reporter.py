@@ -24,6 +24,7 @@ def report():
     content += title_time_reporter.report("机器之心", "jiqizhixin")
     content += title_time_reporter.report("量子位", "liangziwei")
     content += title_time_reporter.report("新智元", "xinzhiyuan")
+    content += title_time_reporter.report("极客公园", "geekpark")
     content += new_stack_reporter.report()
     content += infoq_reporter.report()
     content += hacker_news_reporter.report()
