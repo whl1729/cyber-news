@@ -92,6 +92,18 @@ def format_date_2(date_str: str):
             return date_str
 
 
+def format_date_3(date_str: str) -> str:
+    """
+    :param date_str: 日期字符串，示例："September 3, 2024"
+    """
+    try:
+        date_obj = datetime.strptime(date_str, "%B %d, %Y")
+        return date_obj.strftime("%Y-%m-%d")
+    except ValueError as e:
+        logger.warn(f"Failed to format date: {e}")
+        return date_str
+
+
 def format_time(time_str: str) -> str:
     """
     :param time_str: 时间字符串，示例："Sep 2, 2024 02:13 PM"

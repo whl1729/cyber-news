@@ -26,10 +26,10 @@ def report():
     ]
 
     content = create_header()
-    content += github_trending_reporter.report()
     for title, table_name in title_and_table_names:
         content += report_news(title, table_name)
 
+    content += github_trending_reporter.report()
     content += ruanyifeng_weekly_reporter.report()
     content += github_received_event_reporter.report()
     content += github_notification_reporter.report()
