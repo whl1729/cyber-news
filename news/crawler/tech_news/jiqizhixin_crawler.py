@@ -12,8 +12,6 @@ JIQIZHIXIN_URL = "https://www.jiqizhixin.com"
 
 
 class JiqizhixinParser(WebParser):
-    """机器之心网站解析器"""
-
     def parse(self, resp_text: str) -> List[dict]:
         soup = BeautifulSoup(resp_text, "lxml")
         news_list = []

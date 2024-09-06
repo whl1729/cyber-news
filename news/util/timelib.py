@@ -50,6 +50,16 @@ def n_days_ago(n: int):
     return days_ago.strftime("%Y-%m-%d")
 
 
+def n_hours_ago(n: int):
+    hours_ago = datetime.now() - timedelta(hours=n)
+    return hours_ago.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def n_minutes_ago(n: int):
+    minutes_ago = datetime.now() - timedelta(minutes=n)
+    return minutes_ago.strftime("%Y-%m-%d %H:%M:%S")
+
+
 def format_date(date_str: str) -> str:
     """
     :param date_str: 日期字符串，示例："2 May 2024"

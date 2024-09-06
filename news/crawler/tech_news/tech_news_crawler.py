@@ -1,11 +1,13 @@
 from news.crawler.tech_news import infoq_crawler
 from news.crawler.tech_news import jiqizhixin_crawler
+from news.crawler.tech_news import liangziwei_crawler
 from news.crawler.tech_news import new_stack_crawler
 
 
 def crawl():
     infoq_crawler.crawl()
     jiqizhixin_crawler.crawl()
+    liangziwei_crawler.crawl()
     new_stack_crawler.crawl()
 
 

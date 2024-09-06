@@ -1,3 +1,5 @@
+import traceback
+
 from news.util import fs
 from news.util import myrequests
 from news.util.logger import logger
@@ -19,7 +21,9 @@ def crawl(
     try:
         news_list = parser.parse(resp_text)
     except Exception as e:
-        logger.error(f"{parser} failed to parse {name}: {e}")
+        logger.error(
+            f"{parser} failed to parse {name}: {e}, trace: {traceback.format_exc()}"
+        )
         return False
 
     count = mongo.insert_many_new(name, "id", news_list)
