@@ -1,33 +1,35 @@
-from news.reporter import cpp_reporter
 from news.reporter import github_notification_reporter
 from news.reporter import github_received_event_reporter
 from news.reporter import github_trending_reporter
-from news.reporter import go_reporter
-from news.reporter import hacker_news_reporter
-from news.reporter import infoq_reporter
-from news.reporter import new_stack_reporter
-from news.reporter import python_reporter
 from news.reporter import ruanyifeng_weekly_reporter
-from news.reporter import rust_reporter
-from news.reporter import title_time_reporter
 from news.util import fs
 from news.util import timelib
+from news.util.logger import logger
+from news.util.mongodb import mongo
+from news.util.timelib import yesterday
 
 
 def report():
+    title_and_table_names = [
+        ("机器之心", "jiqizhixin"),
+        ("量子位", "liangziwei"),
+        ("新智元", "xinzhiyuan"),
+        ("极客公园", "geekpark"),
+        ("C++ Blog", "isocpp_blog"),
+        ("Go Blog", "go_blog"),
+        ("Go News", "go_news"),
+        ("Python Insider", "python_insider"),
+        ("Rust Blog", "rust_blog"),
+        ("The New Stack", "new_stack"),
+        ("InfoQ", "infoq"),
+        ("Hacker News", "hacker_news"),
+    ]
+
     content = create_header()
-    content += cpp_reporter.report()
-    content += go_reporter.report()
-    content += python_reporter.report()
-    content += rust_reporter.report()
     content += github_trending_reporter.report()
-    content += title_time_reporter.report("机器之心", "jiqizhixin")
-    content += title_time_reporter.report("量子位", "liangziwei")
-    content += title_time_reporter.report("新智元", "xinzhiyuan")
-    content += title_time_reporter.report("极客公园", "geekpark")
-    content += new_stack_reporter.report()
-    content += infoq_reporter.report()
-    content += hacker_news_reporter.report()
+    for title, table_name in title_and_table_names:
+        content += report_news(title, table_name)
+
     content += ruanyifeng_weekly_reporter.report()
     content += github_received_event_reporter.report()
     content += github_notification_reporter.report()
@@ -40,6 +42,35 @@ def create_header():
     title = f'title = "{timelib.today2()}的新闻"'
     date = f"date = {timelib.now4()}"
     return f"{delimiter}\n{title}\n{date}\n{delimiter}\n<!--more-->\n"
+
+
+def report_news(title: str, table_name: str = "", start_date: str = yesterday()):
+    """新闻报告
+    :param title: 标题
+    :param table_name: 数据库表的名字
+    :param start_date: 设置待查询的新闻开始日期
+    """
+    content = f"## {title}\n\n"
+    if table_name == "":
+        table_name = title.lower().replace(" ", "_")
+    news_list = mongo.find(
+        table_name,
+        {"crawled_at": {"$gte": yesterday()}, "created_at": {"$gte": start_date}},
+        [("created_at", -1)],
+    )
+    logger.info(f"{title} count: {len(news_list)}")
+    if len(news_list) == 0:
+        return ""
+
+    for i, news in enumerate(news_list):
+        content += get_news(i, news)
+
+    content += "\n"
+    return content
+
+
+def get_news(id: int, news: dict):
+    return f"{id+1}. [{news['id']}]({news['url']}) ({news['created_at']})\n"
 
 
 if __name__ == "__main__":

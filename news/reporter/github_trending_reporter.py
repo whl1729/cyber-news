@@ -22,6 +22,4 @@ def report():
 
 
 def get_news(id: int, news: dict):
-    content = f"{id+1}. [{news['id']}]({news['link']}): {news['description']}\n"
-    content += f"  - Language: {news['language']}; Stars: {news['stars']}; Forks: {news['forks']}; Today's Stars: {news['stars_today']}\n\n"
-    return content
+    return f"{id+1}. [{news['id']}]({news['link']}): {news['description']}\n"
