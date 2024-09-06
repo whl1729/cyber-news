@@ -3,7 +3,6 @@ from typing import List
 from bs4 import BeautifulSoup
 
 from news.crawler import headers
-from news.util import mystr
 from news.util import timelib
 from news.util import web_crawler
 from news.util.logger import logger
@@ -23,30 +22,14 @@ class LiangziweiParser(WebParser):
                 "id": text_box.h4.a.string,
                 "url": text_box.h4.a["href"],
                 "author": text_box.div.span.string,
-                "created_at": self._parse_time(text_box.div.find(class_="time").string),
+                "created_at": timelib.parse_time(
+                    text_box.div.find(class_="time").string
+                ),
                 "crawled_at": timelib.now2(),
             }
             news_list.append(news)
         logger.info(f"{len(news_list)} liangziwei news parsed")
         return news_list
-
-    @staticmethod
-    def _parse_time(time_str: str) -> str:
-        if "分钟前" in time_str:
-            minutes = mystr.extract_leading_numbers(time_str)
-            return timelib.n_minutes_ago(minutes)
-
-        if "小时前" in time_str:
-            hours = mystr.extract_leading_numbers(time_str)
-            return timelib.n_hours_ago(hours)
-
-        if "昨天" in time_str:
-            return time_str.replace("昨天", timelib.yesterday())
-
-        if "前天" in time_str:
-            return time_str.replace("前天", timelib.n_days_ago(2))
-
-        return time_str
 
 
 def crawl():

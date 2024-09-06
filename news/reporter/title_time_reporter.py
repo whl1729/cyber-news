@@ -14,7 +14,7 @@ def report(title: str, table_name: str = ""):
     yesterday = timelib.yesterday()
     news_list = mongo.find(
         table_name,
-        {"crawled_at": {"$gte": yesterday}},
+        {"created_at": {"$gte": yesterday}},
         [("created_at", -1)],
     )
     logger.info(f"{title} count: {len(news_list)}")

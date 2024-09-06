@@ -6,6 +6,7 @@ from datetime import timedelta
 
 import pytz
 
+from news.util import mystr
 from news.util.logger import logger
 
 
@@ -169,3 +170,21 @@ def format_iso8601_time_2(iso8601_str: str):
     except ValueError as e:
         logger.warn(f"Failed to format iso8601 time: {e}")
         return iso8601_str
+
+
+def parse_time(time_str: str) -> str:
+    if "分钟前" in time_str:
+        minutes = mystr.extract_leading_numbers(time_str)
+        return n_minutes_ago(minutes)
+
+    if "小时前" in time_str:
+        hours = mystr.extract_leading_numbers(time_str)
+        return n_hours_ago(hours)
+
+    if "昨天" in time_str:
+        return time_str.replace("昨天", yesterday())
+
+    if "前天" in time_str:
+        return time_str.replace("前天", n_days_ago(2))
+
+    return time_str
