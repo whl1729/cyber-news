@@ -2,37 +2,18 @@ from news.reporter import github_notification_reporter
 from news.reporter import github_received_event_reporter
 from news.reporter import github_trending_reporter
 from news.reporter import ruanyifeng_weekly_reporter
+from news.reporter.daily_news_reporter import DailyNewsReporter
+from news.reporter.weekly_news_reporter import WeeklyNewsReporter
 from news.util import fs
 from news.util import timelib
-from news.util.logger import logger
-from news.util.mongodb import mongo
-from news.util.timelib import yesterday
 
 
 def report():
-    title_and_table_names = [
-        ("机器之心", "jiqizhixin"),
-        ("量子位", "liangziwei"),
-        ("新智元", "xinzhiyuan"),
-        ("极客公园", "geekpark"),
-        ("C++ Blog", "isocpp_blog"),
-        ("Go Blog", "go_blog"),
-        ("Go News", "go_news"),
-        ("Python Insider", "python_insider"),
-        ("Rust Blog", "rust_blog"),
-        ("The New Stack", "new_stack"),
-        ("InfoQ", "infoq"),
-        ("Hacker News", "hacker_news"),
-    ]
-
     content = create_header()
-    for title, table_name in title_and_table_names:
-        content += report_news(title, table_name)
+    content += report_daily_news()
+    content += report_weekly_news()
+    content += report_personal_news()
 
-    content += github_trending_reporter.report()
-    content += ruanyifeng_weekly_reporter.report()
-    content += github_received_event_reporter.report()
-    content += github_notification_reporter.report()
     filename = f"{timelib.today()}.md"
     fs.save_post(content, filename)
 
@@ -44,33 +25,49 @@ def create_header():
     return f"{delimiter}\n{title}\n{date}\n{delimiter}\n<!--more-->\n"
 
 
-def report_news(title: str, table_name: str = "", start_date: str = yesterday()):
-    """新闻报告
-    :param title: 标题
-    :param table_name: 数据库表的名字
-    :param start_date: 设置待查询的新闻开始日期
-    """
-    content = f"## {title}\n\n"
-    if table_name == "":
-        table_name = title.lower().replace(" ", "_")
-    news_list = mongo.find(
-        table_name,
-        {"crawled_at": {"$gte": yesterday()}, "created_at": {"$gte": start_date}},
-        [("created_at", -1)],
-    )
-    logger.info(f"{title} count: {len(news_list)}")
-    if len(news_list) == 0:
-        return ""
+def report_daily_news() -> str:
+    """报道每日新闻"""
+    daily_reporters = [
+        DailyNewsReporter("机器之心", "jiqizhixin"),
+        DailyNewsReporter("量子位", "liangziwei"),
+        DailyNewsReporter("新智元", "xinzhiyuan"),
+        DailyNewsReporter("极客公园", "geekpark"),
+        DailyNewsReporter("C++ Blog", "isocpp_blog"),
+        DailyNewsReporter("Go Blog"),
+        DailyNewsReporter("Go News"),
+        DailyNewsReporter("Python Insider"),
+        DailyNewsReporter("Rust Blog"),
+        DailyNewsReporter("New Stack"),
+        DailyNewsReporter("InfoQ"),
+        DailyNewsReporter("Hacker News"),
+    ]
 
-    for i, news in enumerate(news_list):
-        content += get_news(i, news)
+    content = ""
+    for reporter in daily_reporters:
+        content += reporter.report()
 
-    content += "\n"
+    content += github_trending_reporter.report()
     return content
 
 
-def get_news(id: int, news: dict):
-    return f"{id+1}. [{news['id']}]({news['url']}) ({news['created_at']})\n"
+def report_weekly_news() -> str:
+    """报道周刊"""
+    weekly_reporters = [
+        WeeklyNewsReporter("Go Weekly"),
+    ]
+
+    content = ruanyifeng_weekly_reporter.report()
+    for reporter in weekly_reporters:
+        content += reporter.report()
+
+    return content
+
+
+def report_personal_news() -> str:
+    """报道私人化的新闻"""
+    content = github_received_event_reporter.report()
+    content += github_notification_reporter.report()
+    return content
 
 
 if __name__ == "__main__":

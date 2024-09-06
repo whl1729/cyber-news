@@ -47,6 +47,12 @@ class MongoDB:
             results = results.sort(sorter)
         return list(results)
 
+    def find_one(
+        self, coll_name: str, filter: Optional[dict] = None, sorter: list = None
+    ) -> dict:
+        results = self.find(coll_name, filter, sorter)
+        return results[0] if results else {}
+
 
 mongo = MongoDB(
     config["mongodb_host"], config["mongodb_port"], config["mongodb_database"]
