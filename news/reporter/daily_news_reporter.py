@@ -1,7 +1,7 @@
 from news.reporter import Reporter
 from news.util.logger import logger
 from news.util.mongodb import mongo
-from news.util.timelib import yesterday
+from news.util.timelib import n_hours_ago
 
 
 class DailyNewsReporter(Reporter):
@@ -9,7 +9,7 @@ class DailyNewsReporter(Reporter):
         self,
         title: str,
         table_name: str = "",
-        start_date: str = yesterday(),
+        start_date: str = n_hours_ago(24),
         order_by: str = "created_at",
     ):
         """每日技术新闻记者
@@ -32,7 +32,6 @@ class DailyNewsReporter(Reporter):
         news_list = mongo.find(
             self._table_name,
             {
-                "crawled_at": {"$gte": yesterday()},
                 "created_at": {"$gte": self._start_date},
             },
             [(self._order_by, -1)],
