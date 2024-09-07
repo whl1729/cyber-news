@@ -54,6 +54,7 @@ def report_weekly_news() -> str:
     """报道周刊"""
     weekly_reporters = [
         WeeklyNewsReporter("Go Weekly"),
+        WeeklyNewsReporter("Pycoder Weekly"),
         WeeklyNewsReporter("Rust Weekly"),
     ]
 
