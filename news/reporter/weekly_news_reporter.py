@@ -30,6 +30,7 @@ class WeeklyNewsReporter(Reporter):
         logger.info(f"{self._title} blogs count: {len(weekly['blogs'])}")
 
         content = f"## [{weekly['id']}]({weekly['url']})\n\n"
+        content += f"> {weekly['created_at']}\n\n"
         for i, blog in enumerate(weekly["blogs"]):
             content += self._get_blog(i, blog)
 

@@ -30,7 +30,7 @@ class GoWeeklyParser(WebParser):
         logger.info(f"{len(blogs)} go weekly blogs parsed")
 
         weekly = {
-            "id": f"{title}: {created_at}",
+            "id": title,
             "url": GO_WEEKLY_ISSUE_URL + issue_no,
             "blogs": blogs,
             "created_at": created_at,
