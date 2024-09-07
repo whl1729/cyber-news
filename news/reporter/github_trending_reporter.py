@@ -18,6 +18,7 @@ def report():
     for i, news in enumerate(news_list):
         content += get_news(i, news)
 
+    content += "\n"
     return content
 
 
