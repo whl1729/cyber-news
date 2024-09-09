@@ -6,6 +6,7 @@ from datetime import timedelta
 
 import pytz
 
+from news.util import mystr
 from news.util.logger import logger
 
 
@@ -31,7 +32,8 @@ def today() -> str:
 
 
 def today2():
-    return datetime.now().strftime("%Y年%m月%d日")
+    now = datetime.now()
+    return f"{now.year}年{now.month}月{now.day}日"
 
 
 def yesterday():
@@ -47,6 +49,16 @@ def yesterday2():
 def n_days_ago(n: int):
     days_ago = datetime.now() - timedelta(n)
     return days_ago.strftime("%Y-%m-%d")
+
+
+def n_hours_ago(n: int):
+    hours_ago = datetime.now() - timedelta(hours=n)
+    return hours_ago.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def n_minutes_ago(n: int):
+    minutes_ago = datetime.now() - timedelta(minutes=n)
+    return minutes_ago.strftime("%Y-%m-%d %H:%M:%S")
 
 
 def format_date(date_str: str) -> str:
@@ -78,6 +90,46 @@ def format_date_2(date_str: str):
         except ValueError as e:
             logger.warn(f"2.2 Failed to format date again: {e}")
             return date_str
+
+
+def format_date_3(date_str: str) -> str:
+    """
+    :param date_str: 日期字符串，示例："September 3, 2024"
+    """
+    try:
+        date_obj = datetime.strptime(date_str, "%B %d, %Y")
+        return date_obj.strftime("%Y-%m-%d")
+    except ValueError as e:
+        logger.warn(f"Failed to format date: {e}")
+        return date_str
+
+
+def format_date_4(date_str: str) -> str:
+    """
+    :param date_str: 日期字符串，示例："2024-09-04T00:00:00-04:00"
+    """
+    try:
+        date_obj = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S%z")
+        return date_obj.strftime("%Y-%m-%d %H:%M:%S")
+    except ValueError as e:
+        logger.warn(f"Failed to format date: {e}")
+        return date_str
+
+
+def format_date_5(date_str: str) -> str:
+    """
+    :param date_str: 日期字符串，示例："Sept. 3, 2024"
+    :return: 日期字符串，示例："2024-09-03"
+    """
+    try:
+        date_str = date_str.replace("June", "Jun.")
+        date_str = date_str.replace("July", "Jul.")
+        date_str = date_str.replace("Sept.", "Sep.")
+        date_obj = datetime.strptime(date_str, "%b. %d, %Y")
+        return date_obj.strftime("%Y-%m-%d")
+    except ValueError as e:
+        logger.warn(f"Failed to format date: {e}")
+        return date_str
 
 
 def format_time(time_str: str) -> str:
@@ -158,3 +210,31 @@ def format_iso8601_time_2(iso8601_str: str):
     except ValueError as e:
         logger.warn(f"Failed to format iso8601 time: {e}")
         return iso8601_str
+
+
+def parse_time(time_str: str) -> str:
+    if "分钟前" in time_str:
+        minutes = mystr.extract_leading_numbers(time_str)
+        return n_minutes_ago(minutes)
+
+    if "小时前" in time_str:
+        hours = mystr.extract_leading_numbers(time_str)
+        return n_hours_ago(hours)
+
+    if "天前" in time_str:
+        days = mystr.extract_leading_numbers(time_str)
+        return n_days_ago(days)
+
+    if "昨天" in time_str:
+        return time_str.replace("昨天", yesterday())
+
+    if "前天" in time_str:
+        return time_str.replace("前天", n_days_ago(2))
+
+    try:
+        date_obj = datetime.strptime(time_str, "%Y/%m/%d")
+        return date_obj.strftime("%Y-%m-%d")
+    except ValueError as _:
+        pass
+
+    return time_str

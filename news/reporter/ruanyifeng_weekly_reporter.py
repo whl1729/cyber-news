@@ -22,7 +22,7 @@ def report():
 def get_blog(blog: dict):
     date = timelib.format_iso8601_time(blog["created_at"])
     content = f"## [{blog['id']}]({blog['url']})\n\n"
-    content += f"({date})\n\n"
+    content += f"> {date}\n\n"
     for name, news_list in blog["sections"].items():
         content += f"### {name}\n\n"
         content += "\n".join(news_list)

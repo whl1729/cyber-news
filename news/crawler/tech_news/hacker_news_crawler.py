@@ -10,7 +10,7 @@ from news.util.configer import config
 from news.util.logger import logger
 from news.util.web_parser import WebParser
 
-hacker_news_url = "https://news.ycombinator.com/"
+hacker_news_host = "https://news.ycombinator.com/"
 
 
 class HackerNewsParser(WebParser):
@@ -25,15 +25,18 @@ class HackerNewsParser(WebParser):
                 athing = subtext.find_next_sibling(class_="athing")
                 continue
 
+            url = titleline.a["href"]
+            if "http" not in url:
+                url = hacker_news_host + url
+
             news = {
-                "id": athing["id"],
-                "title": titleline.a.string,
+                "id": titleline.a.string,
                 "url": titleline.a["href"],
                 "host": self._get_host(titleline),
                 "score": self._get_score(subtext),
                 "comment_count": self._get_comment_count(subtext),
                 "created_at": self._get_time(subtext),
-                "updated_at": timelib.now2(),
+                "crawled_at": timelib.now2(),
             }
             news_list.append(news)
 
@@ -55,9 +58,12 @@ class HackerNewsParser(WebParser):
     def _get_time(subtext: Tag) -> str:
         age = subtext.find(class_="age")
         if not age:
-            return timelib.now3()
+            return timelib.now2()
 
-        return age.get("title", timelib.now3())
+        try:
+            return timelib.format_iso8601_time_2(age["title"])
+        except ValueError as _:
+            return timelib.now2()
 
     @staticmethod
     def _get_score(subtext: Tag) -> int:
@@ -79,7 +85,7 @@ def crawl():
     parser = HackerNewsParser()
     web_crawler.crawl(
         parser,
-        hacker_news_url,
+        hacker_news_host,
         "hacker_news",
         proxies=config["proxies"],
     )

@@ -2,7 +2,7 @@ from news.util import timelib
 from news.util.logger import logger
 from news.util.mongodb import mongo
 
-TITLE = "## Github Notifications\n\n"
+TITLE = "## Github Notifications\n"
 
 
 def report():
@@ -24,7 +24,7 @@ def report():
 def get_notification(id: int, notification: dict):
     article = get_article(notification["type"])
     when = timelib.format_iso_time(notification["updated_at"])
-    content = f"{id+1}. {article} {notification['type']} on **{notification['repo']}**: [{notification['subject']}]({notification['url']}) ({when})\n\n"
+    content = f"\n{id+1}. {article} {notification['type']} on **{notification['repo']}**: [{notification['subject']}]({notification['url']}) ({when})\n"
     return content
 
 
