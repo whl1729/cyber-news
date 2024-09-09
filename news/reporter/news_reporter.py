@@ -32,6 +32,7 @@ def report_daily_news() -> str:
         DailyNewsReporter("量子位", "liangziwei"),
         DailyNewsReporter("新智元", "xinzhiyuan"),
         DailyNewsReporter("极客公园", "geekpark"),
+        DailyNewsReporter("自动驾驶之心", "cv_autobot"),
         DailyNewsReporter("C++ Blog", "isocpp_blog"),
         DailyNewsReporter("Go Blog"),
         DailyNewsReporter("Go News"),
