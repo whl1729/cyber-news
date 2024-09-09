@@ -31,7 +31,7 @@ class HackerNewsParser(WebParser):
 
             news = {
                 "id": titleline.a.string,
-                "url": titleline.a["href"],
+                "url": url,
                 "host": self._get_host(titleline),
                 "score": self._get_score(subtext),
                 "comment_count": self._get_comment_count(subtext),
