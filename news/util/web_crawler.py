@@ -13,8 +13,11 @@ def crawl(
     name: str,
     headers: dict = None,
     proxies: dict = None,
+    use_selenium: bool = False,
 ) -> bool:
-    resp_text = get(url, name=name, headers=headers, proxies=proxies)
+    resp_text = get(
+        url, name=name, headers=headers, proxies=proxies, use_selenium=use_selenium
+    )
     if resp_text == "":
         return False
 
@@ -36,8 +39,13 @@ def get(
     name: str,
     headers: dict = None,
     proxies: dict = None,
+    use_selenium: bool = False,
 ) -> str:
-    response = myrequests.get(url, headers=headers, proxies=proxies, timeout=10)
+    if use_selenium:
+        response = myrequests.get_with_selenium(url, timeout=10)
+    else:
+        response = myrequests.get(url, headers=headers, proxies=proxies, timeout=10)
+
     if response is None:
         logger.error(f"No response from {url}")
         return ""

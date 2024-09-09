@@ -237,4 +237,10 @@ def parse_time(time_str: str) -> str:
     except ValueError as _:
         pass
 
+    try:
+        date_obj = datetime.strptime(time_str, "%m-%d %H:%M")
+        return date_obj.strftime("%Y-%m-%d %H:%M")
+    except ValueError as _:
+        pass
+
     return time_str

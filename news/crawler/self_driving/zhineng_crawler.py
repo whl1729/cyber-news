@@ -2,14 +2,13 @@ from typing import List
 
 from bs4 import BeautifulSoup
 
-from news.crawler import headers
 from news.util import timelib
 from news.util import web_crawler
 from news.util.logger import logger
 from news.util.web_parser import WebParser
 
 ZHINENG_HOST = "https://xueqiu.com/u/zhineng"
-XUEQIU_HOST = "https://xueqiu.com/"
+XUEQIU_HOST = "https://xueqiu.com"
 
 
 class ZhinengParser(WebParser):
@@ -22,7 +21,7 @@ class ZhinengParser(WebParser):
             news = {
                 "id": title.h3.span.text,
                 "url": XUEQIU_HOST + title.a["href"],
-                "created_at": timelib.parse_time(article_time.text),
+                "created_at": timelib.parse_time(article_time.text.split("·")[0]),
                 "crawled_at": timelib.now2(),
             }
             news_list.append(news)
@@ -32,7 +31,7 @@ class ZhinengParser(WebParser):
 
 def crawl():
     parser = ZhinengParser()
-    web_crawler.crawl(parser, ZHINENG_HOST, "zhineng", headers=headers)
+    web_crawler.crawl(parser, ZHINENG_HOST, "zhineng", use_selenium=True)
 
 
 if __name__ == "__main__":
