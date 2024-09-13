@@ -10,7 +10,7 @@ class DailyNewsReporter(Reporter):
         title: str,
         table_name: str = "",
         start_date: str = n_hours_ago(24),
-        order_by: str = "created_at",
+        order_by: str = "crawled_at",
     ):
         """每日技术新闻记者
         :param title: 标题
@@ -32,7 +32,7 @@ class DailyNewsReporter(Reporter):
         news_list = mongo.find(
             self._table_name,
             {
-                "created_at": {"$gte": self._start_date},
+                "crawled_at": {"$gte": self._start_date},
             },
             [(self._order_by, -1)],
         )
