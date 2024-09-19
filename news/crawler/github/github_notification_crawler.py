@@ -29,7 +29,9 @@ class GithubNotificationParser:
     def _get_url(notification: dict) -> str:
         url = notification["subject"]["url"]
         if url:
-            return url.replace("api.github.com/repos", "github.com")
+            return url.replace("api.github.com/repos", "github.com").replace(
+                "/pulls/", "/pull/"
+            )
 
         url = github.host + "/" + notification["repository"]["full_name"]
         if notification["subject"]["type"] == "Discussion":
