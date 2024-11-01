@@ -199,6 +199,8 @@ def format_iso8601_time_2(iso8601_str: str):
     """
     :param iso8601_str: ISO 8601 日期字符串，例如："2024-09-04T21:37:33.000000Z" 或 "2024-09-04T21:37:33"
     """
+    # 2024-11-01: 现在 Hacker News 的日期字符串信息还附带有时间戳信息，因此将其去除
+    iso8601_str = iso8601_str.split(" ")[0]
     try:
         # 解析日期时间字符串为 datetime 对象
         if iso8601_str.endswith("Z"):
