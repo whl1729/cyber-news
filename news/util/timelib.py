@@ -1,6 +1,7 @@
 """
 This module gets time information.
 """
+
 from datetime import datetime
 from datetime import timedelta
 
@@ -160,12 +161,15 @@ def format_time_2(time_str: str) -> str:
     try:
         # 解析日期时间字符串为 datetime 对象
         date_obj = datetime.strptime(time_str, "%a, %d %b %Y %H:%M:%S %z")
-
-        # 将 datetime 对象格式化为所需的字符串格式
         return date_obj.strftime("%Y-%m-%d %H:%M:%S")
-    except ValueError as e:
-        logger.warn(f"2. Failed to format time: {e}")
-        return time_str
+    except ValueError:
+        try:
+            # 尝试使用 %Z 格式（如 GMT）
+            date_obj = datetime.strptime(time_str, "%a, %d %b %Y %H:%M:%S %Z")
+            return date_obj.strftime("%Y-%m-%d %H:%M:%S")
+        except ValueError as e:
+            logger.warn(f"2. Failed to format time: {e}")
+            return time_str
 
 
 def format_iso_time(iso_time_str: str):
@@ -236,13 +240,13 @@ def parse_time(time_str: str) -> str:
     try:
         date_obj = datetime.strptime(time_str, "%Y/%m/%d")
         return date_obj.strftime("%Y-%m-%d")
-    except ValueError as _:
+    except ValueError:
         pass
 
     try:
         date_obj = datetime.strptime(time_str, "%m-%d %H:%M")
         return date_obj.strftime("%Y-%m-%d %H:%M")
-    except ValueError as _:
+    except ValueError:
         pass
 
     return time_str

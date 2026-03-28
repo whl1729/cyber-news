@@ -1,4 +1,5 @@
 """This module provides logging functionality."""
+
 import logging
 from logging.handlers import RotatingFileHandler
 

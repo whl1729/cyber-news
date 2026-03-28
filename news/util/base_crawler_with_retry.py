@@ -70,7 +70,7 @@ class BaseCrawlerWithRetry(ABC):
                     elapsed = (datetime.now() - start_time).total_seconds()
                     self._record_health(True, None, None, elapsed, attempt)
                     logger.info(
-                        f"[{self.name}] 爬取成功 (耗时 {elapsed:.2f}s, 重试 {attempt-1} 次)"
+                        f"[{self.name}] 爬取成功 (耗时 {elapsed:.2f}s, 重试 {attempt - 1} 次)"
                     )
                     return True
 
@@ -94,7 +94,9 @@ class BaseCrawlerWithRetry(ABC):
         elapsed = (datetime.now() - start_time).total_seconds()
         error_trace = traceback.format_exc() if last_error else None
         self._record_health(False, failure_reason, error_trace, elapsed, attempt)
-        logger.error(f"[{self.name}] 爬取最终失败 (耗时 {elapsed:.2f}s, 重试 {attempt} 次)")
+        logger.error(
+            f"[{self.name}] 爬取最终失败 (耗时 {elapsed:.2f}s, 重试 {attempt} 次)"
+        )
         return False
 
     def _classify_error(self, error: Exception) -> FailureReason:

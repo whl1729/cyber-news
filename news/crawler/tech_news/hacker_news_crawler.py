@@ -62,7 +62,7 @@ class HackerNewsParser(WebParser):
 
         try:
             return timelib.format_iso8601_time_2(age["title"])
-        except ValueError as _:
+        except ValueError:
             return timelib.now2()
 
     @staticmethod

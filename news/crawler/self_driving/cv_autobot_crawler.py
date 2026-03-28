@@ -19,7 +19,7 @@ class AutobotParser(WebParser):
             title = article.find(name="h4")
             time = (
                 article.find(class_="view-time-box")
-                .text.split("\u00A0")[1]
+                .text.split("\u00a0")[1]
                 .strip()
                 .replace(".", "-")
             )

@@ -1,6 +1,7 @@
 """
 This module manages the file path for the project.
 """
+
 import json
 import os
 import sys
