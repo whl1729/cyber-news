@@ -30,8 +30,11 @@ class Configer:
         )
 
         proxy_url = os.getenv("PROXY_URL")
-        proxies = {"http": proxy_url, "https": proxy_url}
-        self._config["proxies"] = proxies
+        if proxy_url:
+            proxies = {"http": proxy_url, "https": proxy_url}
+            self._config["proxies"] = proxies
+        else:
+            self._config["proxies"] = None
 
     def _load_config(self):
         config_path = fs.config_dir / self._file_path

@@ -1,0 +1,104 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## 项目概述
+
+Cyber News 是一个新闻聚合爬虫项目，每日从多个来源收集技术新闻并生成 Markdown 格式的报告。
+
+**核心流程**：爬取（crawl）→ 报告（report）
+- 爬虫从各个来源抓取新闻并存储到 MongoDB
+- 报告器从数据库读取数据并生成每日/每周新闻报告
+
+## 技术栈
+
+- Python 3.10+
+- MongoDB（存储爬取的新闻数据）
+- Selenium（用于需要 JavaScript 渲染的网站）
+- pre-commit hooks（black, flake8, commitizen）
+
+## 常用命令
+
+### 开发环境设置
+```bash
+# 安装依赖（包括 Python 包和 pre-commit hooks）
+./script/install_dependencies.sh
+```
+
+### 运行程序
+```bash
+# 运行完整流程（爬取 + 生成报告）
+./script/run.sh
+
+# 运行特定脚本
+./script/run.sh -p news/crawler/tech_news/hacker_news_crawler.py
+
+# 指定日志级别
+./script/run.sh -l debug
+```
+
+### 测试
+```bash
+# 运行单个测试文件
+./script/test.sh test/test_hacker_news_parser.py
+
+# 或直接使用 pytest
+pytest test/test_hacker_news_parser.py
+```
+
+## 项目架构
+
+### 目录结构
+- `news/crawler/` - 爬虫实现，按主题分类
+  - `blog/` - 博客爬虫（如阮一峰周刊）
+  - `github/` - GitHub 相关（trending, notifications, events）
+  - `language/` - 编程语言官方博客（Go, Python, Rust, C++）
+  - `self_driving/` - 自动驾驶相关新闻
+  - `tech_news/` - 技术媒体（Hacker News, 机器之心等）
+- `news/reporter/` - 报告生成器
+- `news/util/` - 工具模块（MongoDB, 日志, 配置等）
+- `config/` - 配置文件
+- `script/` - 运行脚本
+
+### 核心模块
+
+**news_generator.py**：主入口，协调爬虫和报告器
+- 调用 `news_crawler.crawl()` 执行所有爬虫
+- 调用 `news_reporter.report()` 生成报告
+
+**news_crawler.py**：爬虫协调器
+- 按顺序调用各类别爬虫（blog, github, language, self_driving, tech_news）
+- 每个类别爬虫负责调用其子爬虫
+
+**news_reporter.py**：报告生成器
+- 生成每日新闻报告（DailyNewsReporter）
+- 生成周刊报告（WeeklyNewsReporter）
+- 生成个人化新闻（GitHub notifications/events）
+- 输出 Markdown 格式文件
+
+### 配置管理
+
+配置通过环境变量和 YAML 文件管理（`news/util/configer.py`）：
+- 从 `.env` 文件加载环境变量
+- 从 `config/cyber_news_config.yaml` 加载基础配置
+- 必需的环境变量：
+  - `MONGODB_HOST`, `MONGODB_PORT`, `MONGODB_DATABASE`
+  - `GITHUB_TOKEN`（用于 GitHub API）
+  - `PROXY_URL`（可选，用于需要代理的爬虫）
+  - `CHROMEDRIVER_PATH`（用于 Selenium）
+
+### 数据库
+
+使用 MongoDB 存储爬取的新闻：
+- 封装在 `news/util/mongodb.py` 中
+- 提供 `insert_many_new()` 方法避免重复插入
+- 每个新闻源对应一个 collection
+
+## 开发注意事项
+
+- 新增爬虫时，需要在对应的类别爬虫文件中注册
+- 新增报告器时，需要在 `news_reporter.py` 中添加
+- 所有爬虫应继承或遵循现有爬虫的模式
+- 使用 `news/util/logger.py` 进行日志记录
+- 时间处理使用 `news/util/timelib.py`
+- 提交代码前会自动运行 pre-commit hooks（格式化、lint 检查、commit 消息验证）

@@ -1,3 +1,4 @@
+from typing import List
 from typing import Optional
 
 from pymongo import MongoClient
@@ -15,13 +16,13 @@ class MongoDB:
         coll = self._db[coll_name]
         return coll.insert_one(document)
 
-    def insert_many(self, coll_name: str, documents: list[dict]):
+    def insert_many(self, coll_name: str, documents: List[dict]):
         """Insert many documents to a collection"""
         coll = self._db[coll_name]
         return coll.insert_many(documents)
 
     def insert_many_new(
-        self, coll_name: str, primary_key: str, documents: list[dict]
+        self, coll_name: str, primary_key: str, documents: List[dict]
     ) -> int:
         """Insert many new documents to a collection"""
         coll = self._db[coll_name]
@@ -39,8 +40,8 @@ class MongoDB:
         return coll.delete_one(filter)
 
     def find(
-        self, coll_name: str, filter: Optional[dict] = None, sorter: list = None
-    ) -> list:
+        self, coll_name: str, filter: Optional[dict] = None, sorter: List = None
+    ) -> List:
         coll = self._db[coll_name]
         results = coll.find(filter)
         if sorter is not None:
@@ -48,7 +49,7 @@ class MongoDB:
         return list(results)
 
     def find_one(
-        self, coll_name: str, filter: Optional[dict] = None, sorter: list = None
+        self, coll_name: str, filter: Optional[dict] = None, sorter: List = None
     ) -> dict:
         results = self.find(coll_name, filter, sorter)
         return results[0] if results else {}

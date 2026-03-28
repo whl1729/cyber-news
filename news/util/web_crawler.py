@@ -14,7 +14,12 @@ def crawl(
     headers: dict = None,
     proxies: dict = None,
     use_selenium: bool = False,
+    disable_proxy: bool = False,
 ) -> bool:
+    # 如果禁用代理，则不使用代理
+    if disable_proxy:
+        proxies = None
+
     resp_text = get(
         url, name=name, headers=headers, proxies=proxies, use_selenium=use_selenium
     )

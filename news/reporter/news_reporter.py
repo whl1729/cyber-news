@@ -2,6 +2,7 @@ from news.reporter import github_notification_reporter
 from news.reporter import github_received_event_reporter
 from news.reporter import github_trending_reporter
 from news.reporter import ruanyifeng_weekly_reporter
+from news.reporter.crawler_health_reporter import CrawlerHealthReporter
 from news.reporter.daily_news_reporter import DailyNewsReporter
 from news.reporter.weekly_news_reporter import WeeklyNewsReporter
 from news.util import fs
@@ -13,6 +14,7 @@ def report():
     content += report_daily_news()
     content += report_weekly_news()
     content += report_personal_news()
+    content += report_crawler_health()
 
     filename = f"{timelib.today()}.md"
     fs.save_post(content, filename)
@@ -71,6 +73,14 @@ def report_personal_news() -> str:
     """报道私人化的新闻"""
     content = github_received_event_reporter.report()
     content += github_notification_reporter.report()
+    return content
+
+
+def report_crawler_health() -> str:
+    """报道爬虫健康状态"""
+    reporter = CrawlerHealthReporter()
+    content = "\n\n---\n\n"
+    content += reporter.generate_daily_report()
     return content
 
 
