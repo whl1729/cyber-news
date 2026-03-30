@@ -46,5 +46,13 @@ class Configer:
     def get_config(self):
         return self._config
 
+    def get_enabled_topics(self):
+        return self._config.get("enabled_topics")
+
 
 config = Configer("cyber_news_config.yaml").get_config()
+
+
+def get_enabled_topics():
+    configer = Configer("cyber_news_config.yaml")
+    return configer.get_enabled_topics()

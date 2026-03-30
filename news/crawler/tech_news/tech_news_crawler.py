@@ -5,16 +5,27 @@ from news.crawler.tech_news import jiqizhixin_crawler
 from news.crawler.tech_news import liangziwei_crawler
 from news.crawler.tech_news import new_stack_crawler
 from news.crawler.tech_news import xinzhiyuan_crawler
+from news.util.configer import get_enabled_topics
+from news.util.logger import logger
 
 
 def crawl():
-    geekpark_crawler.crawl()
-    hacker_news_crawler.crawl()
-    infoq_crawler.crawl()
-    jiqizhixin_crawler.crawl()
-    liangziwei_crawler.crawl()
-    new_stack_crawler.crawl()
-    xinzhiyuan_crawler.crawl()
+    crawlers = {
+        "geekpark": geekpark_crawler,
+        "hacker_news": hacker_news_crawler,
+        "infoq": infoq_crawler,
+        "jiqizhixin": jiqizhixin_crawler,
+        "liangziwei": liangziwei_crawler,
+        "new_stack": new_stack_crawler,
+        "xinzhiyuan": xinzhiyuan_crawler,
+    }
+
+    enabled_topics = get_enabled_topics()
+    for topic, crawler in crawlers.items():
+        if enabled_topics is None or topic in enabled_topics:
+            crawler.crawl()
+        else:
+            logger.info(f"Skipping {topic} (not in enabled_topics)")
 
 
 if __name__ == "__main__":

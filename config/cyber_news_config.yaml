@@ -1,1 +1,17 @@
 name: "cyber-news-crawler"
+
+# List of enabled crawler topics. If not specified, all topics are enabled.
+# Available topics: ruanyifeng_weekly, github_received_event, github_notification,
+# github_trending, cpp_blog, go_blog, python_blog, rust_blog, hacker_news,
+# jiqizhixin, liangziwei, xinzhiyuan
+enabled_topics:
+  - ruanyifeng_weekly
+  - github_received_event
+  - github_notification
+  - github_trending
+  - hacker_news
+  - liangziwei
+  - isocpp_blog
+  - go_blog
+  - python_insider
+  - rust_blog
