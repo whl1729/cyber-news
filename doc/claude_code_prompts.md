@@ -4,6 +4,12 @@
 
 ### 支持爬取 Claude Code 博客
 
+v1.5:
+
+请分析以下问题并修改：
+
+在 reporter 最终生成的 report 中，Claude Code 的博客没有按时间顺序由新到旧排序。
+
 v1.4:
 
 请继续完善 Claude Code 的爬取逻辑：
