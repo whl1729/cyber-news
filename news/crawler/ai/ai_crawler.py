@@ -2,6 +2,7 @@ from news.crawler.ai import chip_huyen_blog_crawler
 from news.crawler.ai import claude_code_blog_crawler
 from news.crawler.ai import karpathy_blog_crawler
 from news.crawler.ai import openai_news_crawler
+from news.crawler.ai import sebastian_raschka_blog_crawler
 from news.util.configer import get_enabled_topics
 from news.util.logger import logger
 
@@ -12,6 +13,7 @@ def crawl():
         "openai_news": openai_news_crawler,
         "karpathy_blog": karpathy_blog_crawler,
         "chip_huyen_blog": chip_huyen_blog_crawler,
+        "sebastian_raschka_blog": sebastian_raschka_blog_crawler,
     }
 
     enabled_topics = get_enabled_topics()
