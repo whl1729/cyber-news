@@ -126,3 +126,48 @@ def crawl():
 ```
 
 这样可以通过配置文件中的 `enabled_topics` 字段控制哪些爬虫运行，不列出则全部运行。
+
+## 新需求开发完成后的验证步骤
+
+每次开发完新的爬虫或报告器后，**必须**按以下步骤验证：
+
+### 1. 运行爬虫，验证能爬取到新闻条目
+
+```bash
+./script/run.sh -p news/crawler/ai/<your_crawler>.py -l debug
+# 预期：日志中显示 "N <source> inserted"（N > 0，首次运行）或 "N <source> parsed"
+```
+
+### 2. 运行报告生成器，验证新区块存在且按 created_at 降序排列
+
+```bash
+./script/run.sh -p news/reporter/news_reporter.py -l debug
+# 预期：日志中显示 "<Section Title> count: N"（N > 0）
+```
+
+### 3. 验证报告内容
+
+```bash
+grep -A 10 "## <Section Title>" $(ls /Users/along/src/cyber-daily-news/content/posts/*.md | tail -1)
+# 预期：显示新闻列表，日期格式 YYYY-MM-DD，从新到旧排列
+```
+
+### 4. 运行 pre-commit 检查代码规范
+
+```bash
+git add <modified files>
+pre-commit run --files <modified files>
+# 预期：所有检查通过（black, flake8, autoflake 等）
+```
+
+### 5. 在配置文件中注册新 topic
+
+在 `config/cyber_news_config.yaml` 的 `enabled_topics` 列表中新增对应的 topic 名称（即爬虫 `dict` 中使用的 key）：
+
+```yaml
+enabled_topics:
+  - <new_topic_name>
+  # ...其他已有 topics
+```
+
+不注册则该爬虫不会在完整流程中运行。

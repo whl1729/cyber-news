@@ -2,6 +2,21 @@
 
 ## 2026-04-01
 
+### 爬取 Andrej Karpathy blog
+
+v1.1:
+
+请在 @config/cyber_news_config.yaml 的 `enabled_topics` 中新增当前 topic，并将这个操作写入 CLAUDE.md
+
+v1.0:
+
+请帮忙增加爬取 Andrej Karpathy blog 的功能：
+
+1. 爬取的网站地址为：`https://karpathy.github.io`
+2. 我手动下载的离线 HTML 路径为：`/Users/along/Downloads/Andrej_Karpathy_blog.html`
+2. 请在 @news/crawler/ai 中支持爬取 Andrej Karpathy blog
+3. 请在 @news/reporter 中增加显示 Andrej Karpathy blog
+
 ### 支持爬取 OpenAI News
 
 v1.1:
