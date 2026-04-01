@@ -14,7 +14,6 @@ def report():
     content += report_daily_news()
     content += report_weekly_news()
     content += report_personal_news()
-    content += report_crawler_health()
 
     filename = f"{timelib.today()}.md"
     fs.save_post(content, filename)
