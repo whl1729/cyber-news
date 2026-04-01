@@ -2,6 +2,17 @@
 
 ## 2026-04-01
 
+### 爬取 Chip Huyen Blog
+
+v1.0:
+
+请帮忙增加爬取 Chip Huyen blog 的功能：
+
+1. 爬取的网站地址为：`https://huyenchip.com/blog/`
+2. 我手动下载的离线 HTML 路径为：`/Users/along/Downloads/Chip_Huyen_Blog.html`
+3. 请在 @news/crawler/ai 中增加对应的 crawler
+4. 请在 @news/reporter 中增加对应的 reporter
+
 ### 爬取 Andrej Karpathy blog
 
 v1.1:
@@ -14,8 +25,8 @@ v1.0:
 
 1. 爬取的网站地址为：`https://karpathy.github.io`
 2. 我手动下载的离线 HTML 路径为：`/Users/along/Downloads/Andrej_Karpathy_blog.html`
-2. 请在 @news/crawler/ai 中支持爬取 Andrej Karpathy blog
-3. 请在 @news/reporter 中增加显示 Andrej Karpathy blog
+3. 请在 @news/crawler/ai 中支持爬取 Andrej Karpathy blog
+4. 请在 @news/reporter 中增加显示 Andrej Karpathy blog
 
 ### 支持爬取 OpenAI News
 
@@ -63,9 +74,9 @@ v1.0:
 
 1. 爬取的网站地址为：`https://openai.com/zh-Hans-CN/news/`
 2. 我手动下载的离线 HTML 路径为：`/Users/along/Downloads/OpenAI_News.html`
-2. 请在 @news/crawler/ai 中支持爬取 OpenAI News
-3. 请在 @news/reporter 中增加显示 OpenAI News
-4. 爬取 OpenAI News 时不需要使用代理
+3. 请在 @news/crawler/ai 中支持爬取 OpenAI News
+4. 请在 @news/reporter 中增加显示 OpenAI News
+5. 爬取 OpenAI News 时不需要使用代理
 
 ### 支持爬取 Claude Code 博客
 

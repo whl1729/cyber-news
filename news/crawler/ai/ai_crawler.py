@@ -1,3 +1,4 @@
+from news.crawler.ai import chip_huyen_blog_crawler
 from news.crawler.ai import claude_code_blog_crawler
 from news.crawler.ai import karpathy_blog_crawler
 from news.crawler.ai import openai_news_crawler
@@ -10,6 +11,7 @@ def crawl():
         "claude_code_blog": claude_code_blog_crawler,
         "openai_news": openai_news_crawler,
         "karpathy_blog": karpathy_blog_crawler,
+        "chip_huyen_blog": chip_huyen_blog_crawler,
     }
 
     enabled_topics = get_enabled_topics()

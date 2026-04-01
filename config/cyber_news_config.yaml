@@ -6,6 +6,7 @@ name: "cyber-news-crawler"
 # jiqizhixin, liangziwei, xinzhiyuan
 enabled_topics:
   - karpathy_blog
+  - chip_huyen_blog
   - openai_news
   - claude_code_blog
   - ruanyifeng_weekly
