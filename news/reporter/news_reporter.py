@@ -29,6 +29,7 @@ def create_header():
 def report_daily_news() -> str:
     """报道每日新闻"""
     daily_reporters = [
+        DailyNewsReporter("Claude Code Blog", "claude_code_blog"),
         DailyNewsReporter("机器之心", "jiqizhixin"),
         DailyNewsReporter("量子位", "liangziwei"),
         DailyNewsReporter("新智元", "xinzhiyuan"),

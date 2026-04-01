@@ -102,3 +102,26 @@ pytest test/test_hacker_news_parser.py
 - 使用 `news/util/logger.py` 进行日志记录
 - 时间处理使用 `news/util/timelib.py`
 - 提交代码前会自动运行 pre-commit hooks（格式化、lint 检查、commit 消息验证）
+
+### 爬虫配置开关
+
+每个类别爬虫文件（如 `tech_news_crawler.py`）中，子爬虫**必须**使用 `dict` 结构注册，并配合 `get_enabled_topics()` 实现按需开关。模板：
+
+```python
+from news.util.configer import get_enabled_topics
+from news.util.logger import logger
+
+def crawl():
+    crawlers = {
+        "topic_name": some_crawler,
+        # ...
+    }
+    enabled_topics = get_enabled_topics()
+    for topic, crawler in crawlers.items():
+        if enabled_topics is None or topic in enabled_topics:
+            crawler.crawl()
+        else:
+            logger.info(f"Skipping {topic} (not in enabled_topics)")
+```
+
+这样可以通过配置文件中的 `enabled_topics` 字段控制哪些爬虫运行，不列出则全部运行。

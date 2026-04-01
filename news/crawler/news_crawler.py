@@ -1,3 +1,4 @@
+from news.crawler.ai import ai_crawler
 from news.crawler.blog import blog_crawler
 from news.crawler.github import github_crawler
 from news.crawler.language import language_crawler
@@ -11,6 +12,7 @@ def crawl():
     language_crawler.crawl()
     self_driving_crawler.crawl()
     tech_news_crawler.crawl()
+    ai_crawler.crawl()
 
 
 if __name__ == "__main__":

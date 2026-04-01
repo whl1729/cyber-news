@@ -1,5 +1,48 @@
 # Claude Code 提示词
 
+## 2026-04-01
+
+### 支持爬取 Claude Code 博客
+
+v1.4:
+
+请继续完善 Claude Code 的爬取逻辑：
+
+目前只爬取了首页默认加载的博客信息，请改为爬取所有信息。
+提示：每点击一次 `View more` 按钮就能多加载一些博客
+
+v1.3:
+
+请分析以下问题并修复：
+
+我查看 /Users/along/src/cyber-daily-news/content/posts/2026-04-01.md，
+发现 claude code blog 数据残缺，比如显示的第一篇博客是 2026-03-12 的，而事实上官网的最新博客是 2026-03-30 的
+
+claude_code_blog_crawler
+
+v1.2:
+
+请修改：
+
+1. 请修改 Claude Code Blog 的路径为 `https://claude.com/blog`
+2. 我下载了 Claude Code Blog 的主页文件，保存在 `~/Downloads/Blog_Claude.html`，请据此检查你的解析过程是否正确
+
+v1.1:
+
+请根据以下要求修改 proposal 文档：
+
+1. 只需要在 daily_news_reporter.py 添加 AI 资讯章节，不需要在 weekly_news_reporter.py 中添加
+2. 请注意新增的 crawler 仍然需要使用 map 结构来支持配置开关，请将这个需求写入相关 Claude 文档，使得每次开发时都能遵守这个规则
+
+v1.0:
+
+请帮忙增加爬取 Claude Code 博客的功能：
+
+1. 请在 @news/crawler 增加一个模块 ai，这个模块中都是爬取 AI 相关资讯
+2. 请在 @news/crawler/ai 中支取爬取 Claude Code 博客，只需爬取标题、时间、Category、Product 等基本信息
+3. 请在 @news/reporter 中增加显示 Claude Code 博客信息
+4. 爬取 Claude Code 时需要使用代理
+
 ## 2026-03-28
 
 ### 支持爬取「机器之心」
