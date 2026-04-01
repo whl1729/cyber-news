@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 import requests
+from curl_cffi import requests as cffi_requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -22,10 +23,26 @@ def get(url, params=None, max_try=10, **kwargs):
             if response.status_code == 200:
                 return response
             logger.warn(
-                f"{i+1}. Failed to get {url}. Status Code: {response.status_code}"
+                f"{i + 1}. Failed to get {url}. Status Code: {response.status_code}"
             )
         except Exception as e:
-            logger.error(f"{i+1}. Failed to get {url}. Exception: {e}")
+            logger.error(f"{i + 1}. Failed to get {url}. Exception: {e}")
+
+    return None
+
+
+def get_with_cffi(url, max_try=3, **kwargs):
+    """使用 curl_cffi 模拟浏览器 TLS 指纹请求，用于绕过 Cloudflare 等检测"""
+    for i in range(max_try):
+        try:
+            response = cffi_requests.get(url, impersonate="chrome", **kwargs)
+            if response.status_code == 200:
+                return response
+            logger.warning(
+                f"{i + 1}. Failed to get {url} with cffi. Status Code: {response.status_code}"
+            )
+        except Exception as e:
+            logger.error(f"{i + 1}. Failed to get {url} with cffi. Exception: {e}")
 
     return None
 
@@ -48,7 +65,7 @@ def get_with_selenium(url, max_try=10, **kwargs):
             browser.get(url)
             return MyResponse(status_code=200, text=browser.page_source)
         except Exception as e:
-            logger.error(f"{i+1}. Failed to get {url} with selenium. Exception: {e}")
+            logger.error(f"{i + 1}. Failed to get {url} with selenium. Exception: {e}")
             return MyResponse(status_code=500, text="")
         finally:
             if browser:

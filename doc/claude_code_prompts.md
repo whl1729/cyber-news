@@ -2,6 +2,56 @@
 
 ## 2026-04-01
 
+### 支持爬取 OpenAI News
+
+v1.1:
+
+请测试是否能爬取到新闻条目，以及是否能正确显示在生成的新闻报告中，并且新闻报告中是否按照 created_at 时间排序。
+请将这些操作写入 Claude 相关文档，以便自动执行。
+
+测试步骤（自动执行）：
+
+1. 运行爬虫，验证能爬取到新闻条目：
+   ```bash
+   ./script/run.sh -p news/crawler/ai/openai_news_crawler.py -l debug
+   # 预期：日志中显示 "N openai news inserted"（N > 0）
+   ```
+
+2. 运行报告生成器，验证 OpenAI News 区块存在且按 created_at 降序排列：
+   ```bash
+   ./script/run.sh -p news/reporter/news_reporter.py -l debug
+   # 预期：日志中显示 "OpenAI News count: N"（N > 0）
+   # 预期：生成的 md 文件中 ## OpenAI News 区块条目日期由新到旧排列
+   ```
+
+3. 验证报告内容：
+   ```bash
+   grep -A 15 "## OpenAI News" $(ls /Users/along/src/cyber-daily-news/content/posts/*.md | tail -1)
+   # 预期：显示新闻列表，日期格式 YYYY-MM-DD，从新到旧排列
+   ```
+
+4. 运行 pre-commit 检查代码规范：
+   ```bash
+   git add news/crawler/ai/openai_news_crawler.py news/crawler/ai/ai_crawler.py news/reporter/news_reporter.py news/util/myrequests.py requirements.txt
+   pre-commit run --files news/crawler/ai/openai_news_crawler.py news/crawler/ai/ai_crawler.py news/reporter/news_reporter.py news/util/myrequests.py requirements.txt
+   # 预期：所有检查通过（black, flake8, autoflake 等）
+   ```
+
+技术说明：
+- OpenAI 网站使用 Cloudflare TLS 指纹检测，需用 `curl_cffi` 模拟 Chrome 指纹（已加入 requirements.txt）
+- 解析逻辑：`<a aria-label="标题 - 分类 - 日期">` + `<time datetime="YYYY-MM-DDTHH:MM">` 取日期前10位
+- 使用全局代理（`config["proxies"]`），同 Claude Code Blog 爬虫
+
+v1.0:
+
+请帮忙增加爬取 OpenAI News 的功能：
+
+1. 爬取的网站地址为：`https://openai.com/zh-Hans-CN/news/`
+2. 我手动下载的离线 HTML 路径为：`/Users/along/Downloads/OpenAI_News.html`
+2. 请在 @news/crawler/ai 中支持爬取 OpenAI News
+3. 请在 @news/reporter 中增加显示 OpenAI News
+4. 爬取 OpenAI News 时不需要使用代理
+
 ### 支持爬取 Claude Code 博客
 
 v1.5:

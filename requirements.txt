@@ -1,4 +1,5 @@
 bs4
+curl_cffi
 feedparser
 lxml
 pre-commit

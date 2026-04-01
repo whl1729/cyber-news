@@ -98,6 +98,7 @@ pytest test/test_hacker_news_parser.py
 
 - 新增爬虫时，需要在对应的类别爬虫文件中注册
 - 新增报告器时，需要在 `news_reporter.py` 中添加
+- **报告器排序**：`DailyNewsReporter` 默认按 `crawled_at` 排序；对于有明确发布时间的博客类来源（如 Claude Code Blog、语言官方博客等），必须显式指定 `order_by="created_at"`，确保报告中按发布时间由新到旧排列
 - 所有爬虫应继承或遵循现有爬虫的模式
 - 使用 `news/util/logger.py` 进行日志记录
 - 时间处理使用 `news/util/timelib.py`

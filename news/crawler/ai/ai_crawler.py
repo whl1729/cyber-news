@@ -1,4 +1,5 @@
 from news.crawler.ai import claude_code_blog_crawler
+from news.crawler.ai import openai_news_crawler
 from news.util.configer import get_enabled_topics
 from news.util.logger import logger
 
@@ -6,6 +7,7 @@ from news.util.logger import logger
 def crawl():
     crawlers = {
         "claude_code_blog": claude_code_blog_crawler,
+        "openai_news": openai_news_crawler,
     }
 
     enabled_topics = get_enabled_topics()

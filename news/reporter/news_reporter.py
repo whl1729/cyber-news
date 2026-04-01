@@ -32,6 +32,7 @@ def report_daily_news() -> str:
         DailyNewsReporter(
             "Claude Code Blog", "claude_code_blog", order_by="created_at"
         ),
+        DailyNewsReporter("OpenAI News", "openai_news", order_by="created_at"),
         DailyNewsReporter("机器之心", "jiqizhixin"),
         DailyNewsReporter("量子位", "liangziwei"),
         DailyNewsReporter("新智元", "xinzhiyuan"),
