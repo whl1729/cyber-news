@@ -2,6 +2,15 @@
 
 ## 2026-04-01
 
+### 爬取 Simon Willison’s Weblog
+
+请帮忙增加爬取 Simon Willison’s Weblog 的功能：
+
+1. 爬取的网站地址为：`https://simonwillison.net/entries/`
+2. 我手动下载的离线 HTML 路径为：`/Users/along/Downloads/Simon_Willison_Weblog.html`
+3. 请在 @news/crawler/ai 中增加对应的 crawler
+4. 请在 @news/reporter 中增加对应的 reporter
+
 ### 爬取 Sebastian Raschka Blog
 
 请帮忙增加爬取 Chip Huyen blog 的功能：
