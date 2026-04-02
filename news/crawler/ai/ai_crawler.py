@@ -1,5 +1,6 @@
 from news.crawler.ai import chip_huyen_blog_crawler
 from news.crawler.ai import claude_code_blog_crawler
+from news.crawler.ai import deepmind_blog_crawler
 from news.crawler.ai import harrison_chase_blog_crawler
 from news.crawler.ai import karpathy_blog_crawler
 from news.crawler.ai import openai_news_crawler
@@ -20,6 +21,7 @@ def crawl():
         "simon_willison_blog": simon_willison_blog_crawler,
         "harrison_chase_blog": harrison_chase_blog_crawler,
         "yohei_nakajima_blog": yohei_nakajima_blog_crawler,
+        "deepmind_blog": deepmind_blog_crawler,
     }
 
     enabled_topics = get_enabled_topics()

@@ -2,6 +2,16 @@
 
 ## 2026-04-02
 
+### 爬取 DeepMind Blog
+
+v1.0:
+
+请帮忙增加爬取 DeepMind Blog 的功能：
+
+1. 爬取的网站地址为：`https://deepmind.google/blog/`
+3. 请在 @news/crawler/ai 中增加对应的 crawler
+4. 请在 @news/reporter 中增加对应的 reporter
+
 ### 爬取 Harrison Chase's Blog
 
 v1.0:

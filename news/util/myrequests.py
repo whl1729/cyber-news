@@ -16,7 +16,7 @@ class MyResponse:
     text: str
 
 
-def get(url, params=None, max_try=10, **kwargs):
+def get(url, params=None, max_try=5, **kwargs):
     for i in range(max_try):
         try:
             response = requests.get(url, params, **kwargs)
