@@ -2,6 +2,52 @@
 
 ## 2026-04-02
 
+### 爬取其他 AI 博客
+
+请帮忙增加爬取以下博客的功能：
+
+1. 请在 @news/crawler/ai 中增加对应的 crawler
+2. 请在 @news/reporter 中增加对应的 reporter
+
+- [BaoYu Blog][21]
+- [Sam Altman Blog][4]
+- [Mario Zechner][15]
+- [David Heinemeier Hansson][9]
+- [Armin Ronacher's Thoughts and Writings][10]
+- [antirez][11]
+- [Ryan Dahl][12]
+- [The Pragmatic Engineer][13]
+- [sean goedecke][16]
+- [Philipp Schmid][17]
+- [Matt Shumer][18]
+- [Bassim Eledath][19]
+- [Rob Zolkos][22]
+- [Chris Gregori][23]
+- [Addy Osmani][24]
+- [Uwe Friedrichsen][25]
+- [One Useful Thing][26]
+- [Han, Not Solo][27]
+
+  [4]: https://blog.samaltman.com/
+  [8]: https://simonwillison.net
+  [9]: https://world.hey.com/dhh
+  [10]: https://lucumr.pocoo.org
+  [11]: https://antirez.com/latest/0
+  [12]: https://tinyclouds.org
+  [13]: https://newsletter.pragmaticengineer.com
+  [15]: https://mariozechner.at
+  [16]: https://www.seangoedecke.com
+  [17]: https://www.philschmid.de
+  [18]: https://shumer.dev/blog
+  [19]: https://www.bassimeledath.com/blog
+  [21]: https://baoyu.io/
+  [22]: https://www.zolkos.com/
+  [23]: https://www.chrisgregori.dev/
+  [24]: https://addyosmani.com/blog/
+  [25]: https://www.ufried.com/
+  [26]: https://www.oneusefulthing.org
+  [27]: https://leehanchung.github.io/blogs/
+
 ### 爬取 Hugging Face Blog
 
 v1.0:

@@ -51,6 +51,46 @@ def report_daily_news() -> str:
         DailyNewsReporter(
             "Yohei Nakajima Blog", "yohei_nakajima_blog", order_by="created_at"
         ),
+        DailyNewsReporter("BaoYu Blog", "baoyu_blog", order_by="created_at"),
+        DailyNewsReporter("Sam Altman Blog", "sam_altman_blog", order_by="created_at"),
+        DailyNewsReporter(
+            "Mario Zechner Blog", "mario_zechner_blog", order_by="created_at"
+        ),
+        DailyNewsReporter("DHH Blog", "dhh_blog", order_by="created_at"),
+        DailyNewsReporter(
+            "Armin Ronacher Blog", "armin_ronacher_blog", order_by="created_at"
+        ),
+        DailyNewsReporter("antirez Blog", "antirez_blog", order_by="created_at"),
+        DailyNewsReporter("Ryan Dahl Blog", "ryan_dahl_blog", order_by="created_at"),
+        DailyNewsReporter(
+            "The Pragmatic Engineer", "pragmatic_engineer_blog", order_by="created_at"
+        ),
+        DailyNewsReporter(
+            "sean goedecke Blog", "sean_goedecke_blog", order_by="created_at"
+        ),
+        DailyNewsReporter(
+            "Philipp Schmid Blog", "philipp_schmid_blog", order_by="created_at"
+        ),
+        DailyNewsReporter(
+            "Matt Shumer Blog", "matt_shumer_blog", order_by="created_at"
+        ),
+        DailyNewsReporter(
+            "Bassim Eledath Blog", "bassim_eledath_blog", order_by="created_at"
+        ),
+        DailyNewsReporter("Rob Zolkos Blog", "rob_zolkos_blog", order_by="created_at"),
+        DailyNewsReporter(
+            "Chris Gregori Blog", "chris_gregori_blog", order_by="created_at"
+        ),
+        DailyNewsReporter(
+            "Addy Osmani Blog", "addy_osmani_blog", order_by="created_at"
+        ),
+        DailyNewsReporter(
+            "Uwe Friedrichsen Blog", "uwe_friedrichsen_blog", order_by="created_at"
+        ),
+        DailyNewsReporter(
+            "One Useful Thing", "one_useful_thing_blog", order_by="created_at"
+        ),
+        DailyNewsReporter("Han, Not Solo", "han_not_solo_blog", order_by="created_at"),
         DailyNewsReporter("量子位", "liangziwei"),
         DailyNewsReporter("C++ Blog", "isocpp_blog"),
         DailyNewsReporter("Go Blog"),

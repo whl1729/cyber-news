@@ -15,6 +15,24 @@ enabled_topics:
   - huggingface_blog
   - openai_news
   - claude_code_blog
+  - baoyu_blog
+  - sam_altman_blog
+  - mario_zechner_blog
+  - dhh_blog
+  - armin_ronacher_blog
+  - antirez_blog
+  - ryan_dahl_blog
+  - pragmatic_engineer_blog
+  - sean_goedecke_blog
+  - philipp_schmid_blog
+  - matt_shumer_blog
+  - bassim_eledath_blog
+  - rob_zolkos_blog
+  - chris_gregori_blog
+  - addy_osmani_blog
+  - uwe_friedrichsen_blog
+  - one_useful_thing_blog
+  - han_not_solo_blog
   - ruanyifeng_weekly
   - github_received_event
   - github_notification
