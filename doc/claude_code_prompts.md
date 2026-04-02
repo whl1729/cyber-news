@@ -2,6 +2,33 @@
 
 ## 2026-04-01
 
+### 爬取 Harrison Chase's Blog
+
+v1.3:
+
+请帮忙实现一个功能：
+
+我希望程序中支持一个输入参数 `-t <topic>`，当用户输入该参数时，则只爬取这个 topic 的数据。
+
+v1.2:
+
+为什么你无法提取日信息?我看博客中开头是有完整的日期信息的,比如"MAR 10, 2026"
+
+v1.1:
+
+请帮忙修复一个问题：
+
+生成的 Markdown 文档中，Harrison Chase 的每篇博客都是 2026-04-01，不是真实时间，请修改。
+
+v1.0:
+
+请帮忙增加爬取 Harrison Chase’s Weblog 的功能：
+
+1. 爬取的网站地址为：`https://blog.langchain.com/author/harrison/`
+2. 我手动下载的离线 HTML 路径为：`/Users/along/Downloads/Harrison_Chase_Blog.html`
+3. 请在 @news/crawler/ai 中增加对应的 crawler
+4. 请在 @news/reporter 中增加对应的 reporter
+
 ### 爬取 Simon Willison’s Weblog
 
 请帮忙增加爬取 Simon Willison’s Weblog 的功能：
