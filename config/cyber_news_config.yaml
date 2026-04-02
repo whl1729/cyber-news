@@ -12,6 +12,7 @@ enabled_topics:
   - harrison_chase_blog
   - yohei_nakajima_blog
   - deepmind_blog
+  - huggingface_blog
   - openai_news
   - claude_code_blog
   - ruanyifeng_weekly

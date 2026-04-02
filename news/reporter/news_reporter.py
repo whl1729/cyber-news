@@ -12,7 +12,7 @@ from news.util import timelib
 def report():
     content = create_header()
     content += report_daily_news()
-    content += report_weekly_news()
+    # content += report_weekly_news()
     content += report_personal_news()
 
     filename = f"{timelib.today()}.md"
@@ -34,6 +34,9 @@ def report_daily_news() -> str:
         ),
         DailyNewsReporter("OpenAI News", "openai_news", order_by="created_at"),
         DailyNewsReporter("DeepMind Blog", "deepmind_blog", order_by="created_at"),
+        DailyNewsReporter(
+            "Hugging Face Blog", "huggingface_blog", order_by="created_at"
+        ),
         DailyNewsReporter("Karpathy Blog", "karpathy_blog", order_by="created_at"),
         DailyNewsReporter("Chip Huyen Blog", "chip_huyen_blog", order_by="created_at"),
         DailyNewsReporter(
@@ -48,19 +51,12 @@ def report_daily_news() -> str:
         DailyNewsReporter(
             "Yohei Nakajima Blog", "yohei_nakajima_blog", order_by="created_at"
         ),
-        DailyNewsReporter("机器之心", "jiqizhixin"),
         DailyNewsReporter("量子位", "liangziwei"),
-        DailyNewsReporter("新智元", "xinzhiyuan"),
-        DailyNewsReporter("极客公园", "geekpark"),
-        DailyNewsReporter("自动驾驶之心", "cv_autobot"),
-        DailyNewsReporter("芝能汽车", "zhineng"),
         DailyNewsReporter("C++ Blog", "isocpp_blog"),
         DailyNewsReporter("Go Blog"),
         DailyNewsReporter("Go News"),
         DailyNewsReporter("Python Insider"),
         DailyNewsReporter("Rust Blog"),
-        DailyNewsReporter("New Stack"),
-        DailyNewsReporter("InfoQ"),
         DailyNewsReporter("Hacker News"),
     ]
 
