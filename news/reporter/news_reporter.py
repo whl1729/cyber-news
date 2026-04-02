@@ -33,11 +33,17 @@ def report_daily_news() -> str:
             "Claude Code Blog", "claude_code_blog", order_by="created_at"
         ),
         DailyNewsReporter("OpenAI News", "openai_news", order_by="created_at"),
+        DailyNewsReporter("Cursor Blog", "cursor_blog", order_by="created_at"),
         DailyNewsReporter("DeepMind Blog", "deepmind_blog", order_by="created_at"),
         DailyNewsReporter(
             "Hugging Face Blog", "huggingface_blog", order_by="created_at"
         ),
         DailyNewsReporter("Karpathy Blog", "karpathy_blog", order_by="created_at"),
+        DailyNewsReporter(
+            "Martin Fowler: Exploring Gen AI",
+            "martin_fowler_gen_ai",
+            order_by="created_at",
+        ),
         DailyNewsReporter("Chip Huyen Blog", "chip_huyen_blog", order_by="created_at"),
         DailyNewsReporter(
             "Sebastian Raschka Blog", "sebastian_raschka_blog", order_by="created_at"
@@ -91,6 +97,9 @@ def report_daily_news() -> str:
             "One Useful Thing", "one_useful_thing_blog", order_by="created_at"
         ),
         DailyNewsReporter("Han, Not Solo", "han_not_solo_blog", order_by="created_at"),
+        DailyNewsReporter(
+            "Lance Martin Blog", "lance_martin_blog", order_by="created_at"
+        ),
         DailyNewsReporter("量子位", "liangziwei"),
         DailyNewsReporter("C++ Blog", "isocpp_blog"),
         DailyNewsReporter("Go Blog"),

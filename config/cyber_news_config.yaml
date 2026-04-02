@@ -33,6 +33,9 @@ enabled_topics:
   - uwe_friedrichsen_blog
   - one_useful_thing_blog
   - han_not_solo_blog
+  - cursor_blog
+  - martin_fowler_gen_ai
+  - lance_martin_blog
   - ruanyifeng_weekly
   - github_received_event
   - github_notification

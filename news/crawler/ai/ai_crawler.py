@@ -6,13 +6,16 @@ from news.crawler.ai import bassim_eledath_blog_crawler
 from news.crawler.ai import chip_huyen_blog_crawler
 from news.crawler.ai import chris_gregori_blog_crawler
 from news.crawler.ai import claude_code_blog_crawler
+from news.crawler.ai import cursor_blog_crawler
 from news.crawler.ai import deepmind_blog_crawler
 from news.crawler.ai import dhh_blog_crawler
 from news.crawler.ai import han_not_solo_blog_crawler
 from news.crawler.ai import harrison_chase_blog_crawler
 from news.crawler.ai import huggingface_blog_crawler
 from news.crawler.ai import karpathy_blog_crawler
+from news.crawler.ai import lance_martin_blog_crawler
 from news.crawler.ai import mario_zechner_blog_crawler
+from news.crawler.ai import martin_fowler_gen_ai_crawler
 from news.crawler.ai import matt_shumer_blog_crawler
 from news.crawler.ai import one_useful_thing_blog_crawler
 from news.crawler.ai import openai_news_crawler
@@ -60,6 +63,9 @@ def crawl():
         "uwe_friedrichsen_blog": uwe_friedrichsen_blog_crawler,
         "one_useful_thing_blog": one_useful_thing_blog_crawler,
         "han_not_solo_blog": han_not_solo_blog_crawler,
+        "cursor_blog": cursor_blog_crawler,
+        "martin_fowler_gen_ai": martin_fowler_gen_ai_crawler,
+        "lance_martin_blog": lance_martin_blog_crawler,
     }
 
     enabled_topics = get_enabled_topics()

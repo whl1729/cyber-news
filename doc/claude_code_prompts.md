@@ -2,6 +2,17 @@
 
 ## 2026-04-02
 
+### 爬取 3 个 AI 博客
+
+请帮忙增加爬取以下博客的功能：
+
+1. 请在 @news/crawler/ai 中增加对应的 crawler
+2. 请在 @news/reporter 中增加对应的 reporter
+
+- https://cursor.com/cn/blog
+- https://martinfowler.com/articles/exploring-gen-ai.html
+- https://rlancemartin.github.io
+
 ### 爬取其他 AI 博客
 
 请帮忙增加爬取以下博客的功能：
