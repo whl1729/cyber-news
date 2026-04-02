@@ -1,14 +1,36 @@
 # Claude Code 提示词
 
-## 2026-04-01
+## 2026-04-02
 
-### 爬取 Harrison Chase's Blog
+### 支持 topic 参数
 
-v1.3:
+v1.2:
+
+你的修改仍然有问题：请将 @news/news_generator.py 的解析参数的逻辑全部移到 @news/util/argparser.py，包括解析 `-t` 参数。
+@news/util/argparser.py 这个模块就是用来解析所有输入参数的啊，能不能专业一些？
+
+v1.1：
+
+你的修改方法有问题，这样会导致 logger.py 无法使用输入的日志登记参数，建议修改为：
+
+保留在 @news/util/argparser.py 中解析输入参数，@news/news_generator.py 改为调用 @news/util/argparser.py 的函数即可
+
+v1.0:
 
 请帮忙实现一个功能：
 
+#### 需求描述
+
 我希望程序中支持一个输入参数 `-t <topic>`，当用户输入该参数时，则只爬取这个 topic 的数据。
+
+#### 方案描述
+
+建议修改 @news/util/configer.py 的 get_enabled_topics 的逻辑：
+当用户输入 topic 参数时，该函数直接返回用户输入的 topic 即可
+
+## 2026-04-01
+
+### 爬取 Harrison Chase's Blog
 
 v1.2:
 

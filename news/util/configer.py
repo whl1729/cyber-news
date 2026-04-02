@@ -52,7 +52,12 @@ class Configer:
 
 config = Configer("cyber_news_config.yaml").get_config()
 
+from news.util.argparser import args as cli_args
+
 
 def get_enabled_topics():
+    """Get enabled topics. If CLI topic is set, return only that topic."""
+    if cli_args.topic:
+        return [cli_args.topic]
     configer = Configer("cyber_news_config.yaml")
     return configer.get_enabled_topics()

@@ -7,6 +7,7 @@ NEWS_DIR="${PROJECT_DIR}/news"
 INPUT_PATH=""
 LOG_LEVEL="info"
 REMOVE_LOG=0
+TOPIC=""
 
 function show_usage() {
   echo "Usage: $0 path [options]"
@@ -15,6 +16,7 @@ function show_usage() {
   echo "  -l, --log-level LEVEL  Specify log level. Value: debug, info, warn or error. Default: info"
   echo "  -p, --path PATH        Specify a relative script path to run, such as \"news/crawler/news_crawler.py\""
   echo "  -r, --remove-log       Specify whether to remove log before running input script. 0: don't remove; 1: remove. Default: 0"
+  echo "  -t, --topic TOPIC      Specify a topic to crawl, such as \"harrison_chase_blog\""
 }
 
 function parse_args() {
@@ -34,6 +36,10 @@ function parse_args() {
         ;;
       -r|--remove-log)
         REMOVE_LOG=1
+        ;;
+      -t|--topic)
+        TOPIC="$2"
+        shift
         ;;
       *)
         echo "Unknown parameter passed: $1"
@@ -61,7 +67,11 @@ function main() {
   if [[ "${INPUT_PATH}" != "" ]]; then
     python "${WORKING_DIR}/${INPUT_PATH}" -l "${LOG_LEVEL}"
   else
-    python "${PROJECT_DIR}/news/news_generator.py" -l "${LOG_LEVEL}"
+    if [[ "${TOPIC}" != "" ]]; then
+      python "${PROJECT_DIR}/news/news_generator.py" -l "${LOG_LEVEL}" -t "${TOPIC}"
+    else
+      python "${PROJECT_DIR}/news/news_generator.py" -l "${LOG_LEVEL}"
+    fi
   fi
 }
 

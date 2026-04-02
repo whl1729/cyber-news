@@ -7,6 +7,7 @@ from news.crawler.tech_news import tech_news_crawler
 
 
 def crawl():
+    # All category crawlers will use get_enabled_topics() to filter
     blog_crawler.crawl()
     github_crawler.crawl()
     language_crawler.crawl()

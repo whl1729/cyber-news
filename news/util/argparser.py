@@ -2,22 +2,24 @@ import argparse
 
 
 def parse_args():
-    argparser = argparse.ArgumentParser(
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
         "cyber-news",
         description="update daily technology news",
     )
-    argparser.add_argument(
+    parser.add_argument(
         "-l",
         "--log-level",
         default="info",
         help="log level. Value: debug, info, warn or error",
     )
-    args = argparser.parse_args()
-    print("Successfully parsed command-line arguments")
-    return args
+    parser.add_argument(
+        "-t",
+        "--topic",
+        default=None,
+        help="Specific topic to crawl (e.g., harrison_chase_blog)",
+    )
+    return parser.parse_args()
 
 
 args = parse_args()
-
-if __name__ == "__main__":
-    print(f"log_level: {args.log_level}, args: {args}")
