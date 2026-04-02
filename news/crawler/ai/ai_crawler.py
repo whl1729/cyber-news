@@ -5,6 +5,7 @@ from news.crawler.ai import karpathy_blog_crawler
 from news.crawler.ai import openai_news_crawler
 from news.crawler.ai import sebastian_raschka_blog_crawler
 from news.crawler.ai import simon_willison_blog_crawler
+from news.crawler.ai import yohei_nakajima_blog_crawler
 from news.util.configer import get_enabled_topics
 from news.util.logger import logger
 
@@ -18,6 +19,7 @@ def crawl():
         "sebastian_raschka_blog": sebastian_raschka_blog_crawler,
         "simon_willison_blog": simon_willison_blog_crawler,
         "harrison_chase_blog": harrison_chase_blog_crawler,
+        "yohei_nakajima_blog": yohei_nakajima_blog_crawler,
     }
 
     enabled_topics = get_enabled_topics()

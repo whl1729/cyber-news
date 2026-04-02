@@ -44,6 +44,9 @@ def report_daily_news() -> str:
         DailyNewsReporter(
             "Harrison Chase Blog", "harrison_chase_blog", order_by="created_at"
         ),
+        DailyNewsReporter(
+            "Yohei Nakajima Blog", "yohei_nakajima_blog", order_by="created_at"
+        ),
         DailyNewsReporter("机器之心", "jiqizhixin"),
         DailyNewsReporter("量子位", "liangziwei"),
         DailyNewsReporter("新智元", "xinzhiyuan"),
