@@ -72,7 +72,7 @@ def report_daily_news() -> str:
             "The Pragmatic Engineer", "pragmatic_engineer_blog", order_by="created_at"
         ),
         DailyNewsReporter(
-            "sean goedecke Blog", "sean_goedecke_blog", order_by="created_at"
+            "Sean Goedecke Blog", "sean_goedecke_blog", order_by="created_at"
         ),
         DailyNewsReporter(
             "Philipp Schmid Blog", "philipp_schmid_blog", order_by="created_at"
