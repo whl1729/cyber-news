@@ -3,6 +3,7 @@ from typing import List
 
 from bs4 import BeautifulSoup
 
+from news.util import timelib
 from news.util import web_crawler
 from news.util.configer import config
 from news.util.logger import logger
@@ -52,7 +53,7 @@ class RobZolkosBlogParser(WebParser):
                 "id": title,
                 "url": url,
                 "created_at": created_at,
-                "crawled_at": datetime.now().strftime("%Y%m%d%H%M%S"),
+                "crawled_at": timelib.now2(),
             }
         except Exception as e:
             logger.warning(f"Failed to parse rob zolkos blog item: {e}")

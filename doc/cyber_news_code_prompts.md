@@ -1,5 +1,20 @@
 # Claude Code 提示词
 
+## 2026-04-04
+
+v1.1:
+
+但是我的 MongoDB 数据库中，历史数据还是原来的格式，这个问题仍然存在，如何解决？
+
+v1.0:
+
+请帮我修复 1 个问题：
+
+今天我访问 cyber-daily-news 网站，发现网站上会显示很多旧博客。理论上，一天以前的博客不应再显示。
+经过初步分析，我已找出原因（如下所述），请修改。
+
+@news/crawler/ai 的很多 crawler 的 `crawled_at` 字段没遵守 @news/util/timelib.py 的 `now2()` 的格式，导致 @news/reporter/daily_news_reporter.py 的 report 函数的日期比较出错了。
+
 ## 2026-04-02
 
 ### 爬取 3 个 AI 博客
