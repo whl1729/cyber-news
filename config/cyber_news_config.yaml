@@ -37,8 +37,6 @@ enabled_topics:
   - martin_fowler_gen_ai
   - lance_martin_blog
   - ruanyifeng_weekly
-  - github_received_event
-  - github_notification
   - github_trending
   - hacker_news
   - liangziwei
